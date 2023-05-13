@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyhyl0cm0h66y"]
+
+[ext_resource type="Script" path="res://spells/zap/lightning.gd" id="1_3ryik"]
+
+[sub_resource type="Curve" id="Curve_572xd"]
+_data = [Vector2(0, 0.954545), 0.0, 0.3825, 0, 0, Vector2(1, 0.490909), -0.523077, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_6ky67"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.547112, 0.7), -1.77239, -1.77239, 0, 0, Vector2(1, 0.163636), 0.0575174, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_vlwsd"]
+resource_name = "create"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 3.36358, 1),
+"update": 0,
+"values": [Color(2, 2, 2, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sparks:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s77r0"]
+_data = {
+"create": SubResource("Animation_vlwsd")
+}
+
+[node name="Lightning" type="Line2D"]
+self_modulate = Color(1.3, 1.3, 1.3, 1)
+z_index = 1000
+width = 1.0
+width_curve = SubResource("Curve_572xd")
+default_color = Color(0.482353, 0.662745, 1, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_3ryik")
+segments = 16
+
+[node name="Sparks" type="CPUParticles2D" parent="."]
+position = Vector2(0, -1)
+emitting = false
+amount = 12
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+angular_velocity_min = 128.0
+angular_velocity_max = 128.0
+damping_min = 100.0
+damping_max = 100.0
+angle_min = 4.0
+angle_max = 4.0
+scale_amount_curve = SubResource("Curve_6ky67")
+color = Color(0.482353, 0.662745, 1, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(100, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "create"
+libraries = {
+"": SubResource("AnimationLibrary_s77r0")
+}

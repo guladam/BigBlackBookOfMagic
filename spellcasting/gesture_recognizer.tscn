@@ -11,7 +11,7 @@ point_count = 2
 offsets = PackedFloat32Array(0.529801, 1)
 colors = PackedColorArray(0.858824, 0, 0.521569, 1, 0.858824, 0, 0.521569, 0)
 
-[node name="GestureRecognizer" type="Control" node_paths=PackedStringArray("draw_particle", "debug")]
+[node name="GestureRecognizer" type="Control" node_paths=PackedStringArray("draw_particle", "debug", "progress")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,34 +19,52 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ovbns")
-input_action = "spellcast"
+input_action = "draw_spell"
 max_ink = 10.0
-line_thickness = 4.0
-line_color = Color(1, 0.337255, 0.662745, 1)
 draw_particle = NodePath("CPUParticles2D")
 debug = NodePath("DebugGUI")
+progress = NodePath("ProgressBar")
 
 [node name="DebugGUI" parent="." instance=ExtResource("2_rjr1d")]
 layout_mode = 0
 anchors_preset = 0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 31.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-amount = 30
+emitting = false
+amount = 50
 lifetime = 0.5
-explosiveness = 0.5
 randomness = 0.1
 emission_shape = 1
 emission_sphere_radius = 5.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 50.0
-initial_velocity_max = 75.0
-scale_amount_min = 1.7
-scale_amount_max = 1.7
+initial_velocity_min = 65.0
+initial_velocity_max = 85.0
+scale_amount_min = 2.2
+scale_amount_max = 2.2
 scale_amount_curve = SubResource("Curve_62pdv")
 color_ramp = SubResource("Gradient_0oexs")
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 6.0
 default_color = Color(0.858824, 0, 0.521569, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 27.0
+grow_horizontal = 0

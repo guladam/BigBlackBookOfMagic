@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb3xaw0v5v8e6"]
+
+[ext_resource type="PackedScene" uid="uid://dm8otvxcctv4s" path="res://spells/spell.tscn" id="1_lra5k"]
+[ext_resource type="Script" path="res://spells/zap/zap.gd" id="2_mg0aj"]
+
+[node name="Zap" instance=ExtResource("1_lra5k")]
+script = ExtResource("2_mg0aj")
+time_between_zaps = 0.1
+zaps = 3

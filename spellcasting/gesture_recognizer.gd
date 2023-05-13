@@ -10,11 +10,9 @@ signal shape_detected(gesture, ink_left)
 # set to 0 in order to disable tracking ink altogether
 @export var ink_loss_rate := 1 
 @export var recording := true
-@export var line_thickness := 2.0
-@export var line_color := Color(255, 0, 0, 1)
 @export var draw_particle: CPUParticles2D
-@export var ink_healthbar_width := 100
 @export var debug: DebugGUI
+@export var progress: ProgressBar
 @export var create_collisions := true
 @export var max_drawn_col_shapes := 3
 
@@ -129,20 +127,16 @@ func _input(event):
 
 
 func _draw():
-	if drawing.size() <= 0:
-		return
-
-	if line_thickness <= 0:
-		return
-
-	if ink_loss_rate <= 0 or ink_healthbar_width <= 0:
+	if drawing.size() <= 0 or not line:
 		return
 	
-	if current_ink > 0 and ink_healthbar_width > 0:
-		draw_rect(Rect2(10, 10, current_ink * ink_healthbar_width, 20), line_color)
-		# TODO replace this w/ a healthbar
-		
 	line.points = drawing
+
+	if ink_loss_rate <= 0 or not progress:
+		return
+	
+	progress.value = current_ink / max_ink * 100
+
 
 func _on_mouse_entered():
 	can_draw = true
@@ -184,7 +178,8 @@ func recognize_drawn_gesture():
 	
 	var gesture = recognizer.recognize(drawing)
 	var ink_left  = current_ink
-	shape_detected.emit(gesture, ink_left)
+	shape_detected.emit(gesture[0], gesture[1])
+	hide()
 	
 	if recording and debug.status:
 		var msg := "%s, --ink left: %s --drawing: %s --gesture lib: %s"

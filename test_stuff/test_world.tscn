@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgrhj2k3eb4f2"]
+[gd_scene load_steps=13 format=3 uid="uid://bgrhj2k3eb4f2"]
 
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
 [ext_resource type="Texture2D" uid="uid://dkim7n2idgpiv" path="res://test_stuff/DarkForest1.2/bgrd_tree1.png" id="2_fibin"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://tas4m2w1bf0n" path="res://test_stuff/DarkForest1.2/bgrd_tree5.png" id="6_m8ekw"]
 [ext_resource type="Texture2D" uid="uid://cixfgbiwysqqe" path="res://test_stuff/DarkForest1.2/env_ground.png" id="7_mb7ig"]
 [ext_resource type="PackedScene" uid="uid://c6tajrj8qdcep" path="res://player/player.tscn" id="8_yqb23"]
+[ext_resource type="PackedScene" uid="uid://cabxhw4h71uap" path="res://spellcasting/gesture_recognizer.tscn" id="9_bi1ni"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87i5p"]
 texture = ExtResource("7_mb7ig")
@@ -1555,6 +1556,14 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_87i5p")
 
+[sub_resource type="Environment" id="Environment_e1e1l"]
+background_mode = 3
+glow_enabled = true
+glow_levels/4 = 1.0
+glow_blend_mode = 0
+glow_hdr_threshold = 0.4
+glow_hdr_scale = 1.5
+
 [node name="TestWorld" type="Node2D"]
 texture_filter = 1
 
@@ -1595,6 +1604,20 @@ layer_0/tile_data = PackedInt32Array(2162688, 524288, 15, 2228224, 524288, 16, 2
 
 [node name="Player" parent="." instance=ExtResource("8_yqb23")]
 position = Vector2(528, 476)
+spell_similarity_threshold = 0.75
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
+
+[node name="DrawingLayer" type="CanvasLayer" parent="."]
+
+[node name="GestureRecognizer" parent="DrawingLayer" instance=ExtResource("9_bi1ni")]
+recording = false
+create_collisions = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e1e1l")
+
+[connection signal="shape_detected" from="DrawingLayer/GestureRecognizer" to="Player" method="_on_spell_drawn"]
+
+[editable path="DrawingLayer/GestureRecognizer"]
