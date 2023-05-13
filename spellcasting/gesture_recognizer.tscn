@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://cabxhw4h71uap"]
+
+[ext_resource type="Script" path="res://spellcasting/gesture_recognizer.gd" id="1_ovbns"]
+[ext_resource type="PackedScene" uid="uid://c13ejy0x47w5q" path="res://spellcasting/debug_gui.tscn" id="2_rjr1d"]
+
+[sub_resource type="Curve" id="Curve_62pdv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.327273), -1.3139, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0oexs"]
+offsets = PackedFloat32Array(0.529801, 1)
+colors = PackedColorArray(0.858824, 0, 0.521569, 1, 0.858824, 0, 0.521569, 0)
+
+[node name="GestureRecognizer" type="Control" node_paths=PackedStringArray("draw_particle", "debug")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ovbns")
+input_action = "spellcast"
+max_ink = 10.0
+line_thickness = 4.0
+line_color = Color(1, 0.337255, 0.662745, 1)
+draw_particle = NodePath("CPUParticles2D")
+debug = NodePath("DebugGUI")
+
+[node name="DebugGUI" parent="." instance=ExtResource("2_rjr1d")]
+layout_mode = 0
+anchors_preset = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 30
+lifetime = 0.5
+explosiveness = 0.5
+randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
+scale_amount_min = 1.7
+scale_amount_max = 1.7
+scale_amount_curve = SubResource("Curve_62pdv")
+color_ramp = SubResource("Gradient_0oexs")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 6.0
+default_color = Color(0.858824, 0, 0.521569, 1)

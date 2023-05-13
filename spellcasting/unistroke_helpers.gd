@@ -4,7 +4,7 @@ const infinity = 88888888888888
 const rectangle_script = preload("res://spellcasting/rectangle.gd")
 
 static func resample(points, n):
-	var I = path_length(points)/(n - 1) # interval length
+	var I = path_length(points) / (n - 1) # interval length
 	var D = 0.0
 	var newpoints = [points[0]]
 	var i = 1
@@ -23,9 +23,11 @@ static func resample(points, n):
 		newpoints.append(points[points.size() - 1])
 	return newpoints
 
+
 static func indicative_angle(points):
 	var c = centroid(points)
 	return atan2(c.y - points[0].y, c.x - points[0].x)
+
 
 static func rotate_by(points, radians): # rotates points around centroid
 	var c = centroid(points)
@@ -38,6 +40,7 @@ static func rotate_by(points, radians): # rotates points around centroid
 		newpoints.append(Vector2(qx, qy))
 	return newpoints
 
+
 static func scale_to(points, size): # non-uniform scale; assumes 2D gestures (i.e., no lines)
 	var box = bounding_box(points)
 	var newpoints = PackedVector2Array()
@@ -47,6 +50,7 @@ static func scale_to(points, size): # non-uniform scale; assumes 2D gestures (i.
 		newpoints.append(Vector2(qx, qy))
 	return newpoints
 
+
 static func translate_to(points, pt): # translates points' centroid
 	var c = centroid(points)
 	var newpoints = PackedVector2Array()
@@ -55,6 +59,7 @@ static func translate_to(points, pt): # translates points' centroid
 		var qy = points[i].y + pt.y - c.y
 		newpoints.append(Vector2(qx, qy))
 	return newpoints
+
 
 static func vectorize(points): # for Protractor
 	var sum = 0.0
@@ -68,6 +73,7 @@ static func vectorize(points): # for Protractor
 		vector[i] /= magnitude
 	return vector
 
+
 static func optimal_cosine_distance(v1, v2): # for Protractor
 	var a = 0.0
 	var b = 0.0
@@ -76,6 +82,7 @@ static func optimal_cosine_distance(v1, v2): # for Protractor
 		b += v1[i] * v2[i + 1] - v1[i + 1] * v2[i]
 	var angle = atan(b / a)
 	return acos(a * cos(angle) + b * sin(angle))
+
 
 static func centroid(points):
 	var x = 0.0
@@ -86,6 +93,7 @@ static func centroid(points):
 	x /= points.size()
 	y /= points.size()
 	return Vector2(x, y)
+
 
 static func bounding_box(points):
 	var minX = infinity
@@ -99,11 +107,13 @@ static func bounding_box(points):
 		maxY = max(maxY, points[i].y)
 	return rectangle_script.new(minX, minY, maxX - minX, maxY - minY)
 
+
 static func path_distance(pts1, pts2):
 	var d = 0.0
 	for i in range(pts1.size()): # assumes pts1.length == pts2.length
 		d += pts1[i].distance_to(pts2[i])
 	return d / pts1.size()
+
 
 static func path_length(points):        
 	var d = 0.0 

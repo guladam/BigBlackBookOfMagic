@@ -10,17 +10,17 @@ signal shape_detected(gesture, ink_left)
 # set to 0 in order to disable tracking ink altogether
 @export var ink_loss_rate := 1 
 @export var recording := true
-@export var particle_effect := true
-@export var particle_color := Color(1, 1, 1, 1)
-@onready var gesture_json_path =  "res://spellcasting/gestures.json"
-@onready var current_ink = max_ink
-@export var line_thickness = 2.0
-@export var line_color = Color(255, 0, 0, 1)
-@export var ink_healthbar_width = 100
-@export var debug_text: Label
-@export var debug_new_name: LineEdit
-@export var create_collisions = true
-@export var max_drawn_col_shapes = 3
+@export var line_thickness := 2.0
+@export var line_color := Color(255, 0, 0, 1)
+@export var draw_particle: CPUParticles2D
+@export var ink_healthbar_width := 100
+@export var debug: DebugGUI
+@export var create_collisions := true
+@export var max_drawn_col_shapes := 3
+
+@onready var gestures_file := "res://spellcasting/gestures.save"
+@onready var current_ink := max_ink
+@onready var line := $Line2D
 
 var pressed = false
 var recognizer  = preload("res://spellcasting/recognizer.gd").new()
@@ -41,29 +41,18 @@ var saved_gestures = []
 var data = {}
 
 func _ready():
-	if input_action == "":
-		print("TODO: warning message")
-
-	# TODO replace this with a scene
-	if particle_effect: ## set fancy particle effect if user wanted it
-		pass
-		
 	connect("mouse_entered", _on_mouse_entered)
 	connect("mouse_exited", _on_mouse_exited)
 	
-	load_saved_gestures(gesture_json_path)
+	load_saved_gestures(gestures_file)
 	
-	# TODO create this scene and rework this part
-	if recording: ## add debug dev gui if in dev mode
-		#var debug_gui = preload("debug_gui.tscn").instance()
-		#add_child(debug_gui)
-		#debug_gui.set_position(Vector2(get_global_position().x,get_size().y))
-		#get_node("gui/addGesture").connect("pressed",self,"_on_addGesture_pressed")
-		#get_node("gui/saveGesturesToJson").connect("pressed",self,"saveGesturesToJsonFile")
-		#get_node("gui/status").set_text(str("Loaded ",recognizer.unistrokes.size()," recognizer from json library"))
-		#get_tree().set_debug_collisions_hint(true)
-		pass
-		
+	# add debug dev gui if in dev mode
+	if recording:
+		debug.add_gesture.pressed.connect(_on_add_gesture_pressed)
+		debug.save_gesture.pressed.connect(save_gestures)
+		debug.status.set_text("Loaded %s recognizer from disk" % recognizer.unistrokes.size())
+		get_tree().set_debug_collisions_hint(true)
+
 	set_process_input(true)
 	
 	if ink_loss_rate > 0:
@@ -73,6 +62,9 @@ func _ready():
 
 
 func _process(delta):
+	if not InputMap.has_action(input_action):
+		return
+	
 	# on release
 	if not Input.is_action_pressed(input_action) and not pressed and can_draw:
 		if current_ink <= max_ink and ink_replenish_speed != 0:
@@ -91,7 +83,7 @@ func _process(delta):
 
 
 func _input(event):	
-	if not can_draw:
+	if not can_draw or not InputMap.has_action(input_action):
 		return
 
 	# on first press
@@ -100,9 +92,10 @@ func _input(event):
 		pressed = event.pressed
 		current_position = get_local_mouse_position()
 		
-		if particle_effect and drawing.size() < max_rec_points:
-			particleNode.set_emitting(true)
-			particleNode.set_position(current_position)
+		if draw_particle and drawing.size() < max_rec_points:
+			draw_particle.set_emitting(true)
+			draw_particle.set_position(current_position)
+			
 	
 	# while pressed
 	if event is InputEventMouseMotion and pressed:
@@ -110,15 +103,16 @@ func _input(event):
 		# recognize the shape and return
 		if drawing.size() > max_rec_points or current_ink <= 0:
 			recognize_drawn_gesture()
-			particleNode.set_emitting(false)
+			draw_particle.set_emitting(false)
 			return
 		
 		current_position = get_local_mouse_position()
 		drawing.append(current_position)
 		
 		# move particles
-		if particle_effect:
-			particleNode.set_position(current_position)
+		if draw_particle:
+			draw_particle.set_position(current_position)
+			
 		# update the drawing at every second point
 		if drawing.size() % 2:
 			queue_redraw()
@@ -146,10 +140,9 @@ func _draw():
 	
 	if current_ink > 0 and ink_healthbar_width > 0:
 		draw_rect(Rect2(10, 10, current_ink * ink_healthbar_width, 20), line_color)
+		# TODO replace this w/ a healthbar
 		
-	for i in range(1, len(drawing)):
-		draw_line(drawing[i-1], drawing[i], Color(line_color.r, line_color.g, line_color.b, current_ink), line_thickness)
-
+	line.points = drawing
 
 func _on_mouse_entered():
 	can_draw = true
@@ -165,24 +158,24 @@ func _on_add_gesture_pressed():
 	if drawing.size() < min_rec_points or drawing.size() > max_rec_points:
 		return
 		
-	var new_gesture = unistroke.new(debug_new_name.get_text(), drawing)
+	var new_gesture = unistroke.new(debug.gesture_name.get_text(), drawing)
 	recognizer.unistrokes.append(new_gesture)	
 	
 	# store to array that will be written to the json file
-	saved_gestures.append([debug_new_name.get_text(), var_to_str(drawing)])
+	saved_gestures.append([debug.gesture_name.get_text(), var_to_str(drawing)])
 	
 	if recording:
 		print("we have %s recognizer so far" % saved_gestures.size())
 		var status_text = "added drawing: %s uni: %s to ram"
-		debug_text.set_text(status_text % [drawing.size(), recognizer.unistrokes.size()])
+		debug.status.set_text(status_text % [drawing.size(), recognizer.unistrokes.size()])
 		
 	drawing = []
 
 
 func recognize_drawn_gesture():
-	if particle_effect:
-		particleNode.set_position(current_position)
-		particleNode.set_emitting(false)
+	if draw_particle:
+		draw_particle.set_position(current_position)
+		draw_particle.set_emitting(false)
 	
 	if drawing.size() > max_rec_points: 
 		return
@@ -193,11 +186,12 @@ func recognize_drawn_gesture():
 	var ink_left  = current_ink
 	shape_detected.emit(gesture, ink_left)
 	
-	if recording and debug_text:
+	if recording and debug.status:
 		var msg := "%s, --ink left: %s --drawing: %s --gesture lib: %s"
-		debug_text.set_text(msg % [gesture, ink_left, drawing.size(), recognizer.unistrokes.size()])
+		debug.status.set_text(msg % [gesture, ink_left, drawing.size(), recognizer.unistrokes.size()])
 
-	draw_collision_shape(drawing)
+	# TODO this keeps throwing errors
+	#draw_collision_shape(drawing)
 	
 	if ink_loss_rate == 0:
 		current_ink = max_ink
@@ -208,48 +202,55 @@ func recognize_drawn_gesture():
 		drawing = []
 	
 
-func saveGesturesToJsonFile():
+func save_gestures():
 	data = {}
-	var file = File.new()
-	file.open(gestureJsonFilePath, File.WRITE)
-	data["recognizer"] = savedGestures
-	file.store_line(JSON.print(data))
+	
+	var file = FileAccess.open(gestures_file, FileAccess.WRITE)
+	data["recognizer"] = saved_gestures
+	file.store_var(data, true)
 	file.close()
-	if recording:print("saved ",savedGestures.size()," recognizer")
+	
+	if recording:
+		print("saved %s recognizer" % saved_gestures.size())
 
-var loadedGestures = []
+
 func load_saved_gestures(path):
-	if recording:print("loading recognizer from:",path)
-	var file = File.new()
-	file.open(gestureJsonFilePath, File.READ)
-	var rawString = file.get_as_text()
-	if rawString.length() == 0:return #nothing loaded, thus skip
-	data = JSON.parse(rawString).result
+	if recording:
+		print("loading recognizer from:", path)
+	
+	var file = FileAccess.open(gestures_file, FileAccess.READ)
+	
+	# if the file is empty there's nothing to load
+	if not file or file.get_length() == 0:
+		return
+
+	data = file.get_var(true)
 	
 	for gesture in data["recognizer"]:
-		var cleanedGesture = []
-		for vectorval in str2var(gesture[1]):
-			cleanedGesture.append(vectorval)
-		var cleanedGestureData = []
-		cleanedGestureData.append(str(gesture[0]))
-		cleanedGestureData.append(cleanedGesture)
-		loadedGestures.append(cleanedGestureData)
-		savedGestures.append(gesture)
+		var gesture_points = []
+		for point in str_to_var(gesture[1]):
+			gesture_points.append(point)
+		saved_gestures.append(gesture)
+		
+		recognizer.unistrokes.append(unistroke.new(gesture[0], gesture_points))
+	
+	if recording:
+		print ("Loaded %s recognizer!" % saved_gestures.size())
 
-	for loadGesture in loadedGestures:
-		var newGesture = preload("unistroke.gd").new(loadGesture[0], loadGesture[1])
-		recognizer.unistrokes.append(newGesture)
-	if recording:print ("Loaded ",loadedGestures.size()," recognizer!")
 
-### drawing a colision shape from the array ###
-func draw_collision_shape(vector2arr):
-	if current_ink > 0 and create_collisions:
-		var colShapePol = CollisionPolygon2D.new()
-		colShapePol.set_polygon(vector2arr)
-		colShapePol.add_to_group(str("drawnShape:",recognizer.recognize(drawing))) ##will be useful later on for colisions
-		colShapePol.add_to_group("drawnShapes") ## use to keep track of all
-		add_child(colShapePol)
-	### limit how many maximum drawn shapes can exist ### you can destroy them on collision elsewhere
-	if max_drawn_col_shapes > 0:##if set to 0, it is disabled
-		if get_tree().get_nodes_in_group("drawnShapes").size() > max_drawn_col_shapes:
-			get_tree().get_nodes_in_group("drawnShapes")[0].queue_free()## remove the oldest
+func draw_collision_shape(points: Array):
+	if current_ink <= 0 or not create_collisions:
+		return
+	
+	if Geometry2D.triangulate_polygon(points).is_empty():
+		return
+		
+	var col_poly = CollisionPolygon2D.new()
+	col_poly.set_polygon(points)
+	col_poly.add_to_group("drawn_shape:%s" % recognizer.recognize(drawing)[0])
+	col_poly.add_to_group("drawn_shapes")
+	add_child(col_poly)
+	
+	var drawn_col_shapes := get_tree().get_nodes_in_group("drawn_shapes")
+	if max_drawn_col_shapes > 0 and drawn_col_shapes.size() > max_drawn_col_shapes:
+		drawn_col_shapes[0].queue_free()

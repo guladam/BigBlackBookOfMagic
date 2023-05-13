@@ -12,8 +12,8 @@ var unistroke = preload("res://spellcasting/unistroke.gd")
 
 func recognize(points):
 	points = UnistrokeHelpers.resample(points, num_points)
-	points = UnistrokeHelpers.ScaleTo(points, square_size)
-	points = UnistrokeHelpers.TranslateTo(points, origin)
+	points = UnistrokeHelpers.scale_to(points, square_size)
+	points = UnistrokeHelpers.translate_to(points, origin)
 	var b = infinity
 	var u = -1
 	for i in range(unistrokes.size()): # for each unistroke
@@ -21,21 +21,23 @@ func recognize(points):
 		if (d < b):
 			b = d # best (least) distance
 			u = i # unistroke
-	if (u == -1):
+	if u == -1:
 		return ["no match", 0.0]
 	else:
 		return [unistrokes[u].name, 1.0 - b / half_diagonal]
 
+
 func add_gesture(name, points):
-	unistrokes.append(unistroke.new(name, points)) # append new unistroke
+	unistrokes.append(unistroke.new(name, points))
+
 
 func distance_at_best_angle(points, T, a, b, threshold):
 	var x1 = phi * a + (1.0 - phi) * b
 	var f1 = distance_at_angle(points, T, x1)
 	var x2 = (1.0 - phi) * a + phi * b
 	var f2 = distance_at_angle(points, T, x2)
-	while (abs(b - a) > threshold):
-		if (f1 < f2):
+	while abs(b - a) > threshold:
+		if f1 < f2:
 			b = x2
 			x2 = x1
 			f2 = f1
@@ -49,5 +51,5 @@ func distance_at_best_angle(points, T, a, b, threshold):
 			f2 = distance_at_angle(points, T, x2)
 	return min(f1, f2)
 
-func distance_at_angle(points, T, radians):
+func distance_at_angle(points, T, _radians):
 	return UnistrokeHelpers.path_distance(points, T.points)

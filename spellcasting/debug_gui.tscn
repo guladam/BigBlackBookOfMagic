@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://c13ejy0x47w5q"]
+
+[ext_resource type="Script" path="res://spellcasting/debug_gui.gd" id="1_e31yr"]
+
+[node name="DebugGUI" type="HBoxContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+alignment = 1
+script = ExtResource("1_e31yr")
+
+[node name="AddGesture" type="Button" parent="."]
+layout_mode = 2
+action_mode = 0
+text = "Add Gesture"
+
+[node name="SaveGesture" type="Button" parent="."]
+layout_mode = 2
+text = "Save"
+
+[node name="GestureName" type="LineEdit" parent="."]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 1
+text = "draw something... "
