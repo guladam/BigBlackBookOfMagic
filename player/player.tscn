@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6tajrj8qdcep"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_egeqk"]
+[ext_resource type="Texture2D" uid="uid://baaprf5ad3xxs" path="res://test_stuff/AnimationSheet_Character.png" id="1_s4kxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u17po"]
+size = Vector2(13, 24)
+
+[sub_resource type="Animation" id="Animation_jomkv"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 96, 32, 32), Rect2(32, 96, 32, 32), Rect2(64, 96, 32, 32), Rect2(96, 96, 32, 32), Rect2(128, 96, 32, 32), Rect2(160, 96, 32, 32), Rect2(192, 96, 32, 32), Rect2(224, 96, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_b1xme"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 96, 32, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_p6288"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 32, 32), Rect2(32, 0, 32, 32)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsja3"]
+_data = {
+"RESET": SubResource("Animation_b1xme"),
+"idle": SubResource("Animation_p6288"),
+"walk": SubResource("Animation_jomkv")
+}
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_egeqk")
+gravity = 250
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s4kxp")
+region_enabled = true
+region_rect = Rect2(0, 96, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 4)
+shape = SubResource("RectangleShape2D_u17po")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_xsja3")
+}
