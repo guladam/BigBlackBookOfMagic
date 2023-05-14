@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bd3xmx66156kc" path="res://other/health.tscn" id="4_lw6mm"]
 
 [node name="MeleeEnemy" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_y8wi1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -27,7 +29,6 @@ debug_color = Color(0.988235, 0, 0, 0.419608)
 
 [node name="AttackRange" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 64
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
@@ -39,6 +40,6 @@ monitorable = false
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

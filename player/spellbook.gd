@@ -6,7 +6,7 @@ const SPELLS = {
 	"zap": preload("res://spells/zap/zap.tscn")
 }
 
-func change_to_spell(new_spell: String) -> void:
+func change_to_spell(new_spell: String) -> Spell:
 	for c in get_children():
 		c.queue_free()
 	
@@ -16,6 +16,7 @@ func change_to_spell(new_spell: String) -> void:
 		
 	var spell = SPELLS[new_spell].instantiate()
 	add_child(spell)
+	return spell
 
 
 func cast_spell(target: Vector2) -> void:

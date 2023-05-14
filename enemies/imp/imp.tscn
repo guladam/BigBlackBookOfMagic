@@ -13,7 +13,7 @@ size = Vector2(13, 15)
 size = Vector2(18, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_slipj"]
-size = Vector2(90, 20)
+size = Vector2(75, 20)
 
 [sub_resource type="Animation" id="Animation_1co61"]
 length = 0.001
@@ -113,10 +113,7 @@ _data = {
 }
 
 [node name="Imp" instance=ExtResource("1_lrtld")]
-collision_layer = 32
-collision_mask = 0
 speed = 75
-attack_cooldown_seconds = 1.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-2, 0)
@@ -144,6 +141,7 @@ shape = SubResource("RectangleShape2D_gdchm")
 
 [node name="AttackRange" parent="." index="3"]
 position = Vector2(0, -5)
+monitorable = true
 
 [node name="CollisionShape2D" parent="AttackRange" index="0"]
 shape = SubResource("RectangleShape2D_slipj")
@@ -155,5 +153,3 @@ health = 9
 libraries = {
 "": SubResource("AnimationLibrary_my2a1")
 }
-
-[connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_area_entered"]

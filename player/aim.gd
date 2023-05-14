@@ -11,3 +11,8 @@ func _process(delta: float) -> void:
 
 func get_current_aim() -> Vector2:
 	return crosshair.global_position
+
+
+func change_crosshair_range(new_range: float) -> void:
+	crosshair.position.y = -new_range
+	

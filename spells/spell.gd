@@ -1,6 +1,9 @@
 extends Sprite2D
 class_name Spell
 
+@export var cast_range := 150
+
+
 func cast() -> void:
 	pass
 

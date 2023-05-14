@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyhyl0cm0h66y"]
+[gd_scene load_steps=10 format=3 uid="uid://dyhyl0cm0h66y"]
 
 [ext_resource type="Script" path="res://spells/zap/lightning.gd" id="1_3ryik"]
 [ext_resource type="PackedScene" uid="uid://ctdykvb3xpj1m" path="res://other/hit_box.tscn" id="2_ntkna"]
@@ -10,6 +10,10 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_6ky67"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.547112, 0.7), -1.77239, -1.77239, 0, 0, Vector2(1, 0.163636), 0.0575174, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_m6ttr"]
+offsets = PackedFloat32Array(0.567114, 1)
+colors = PackedColorArray(0.482353, 0.662745, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ug5wb"]
 
@@ -90,7 +94,7 @@ _data = {
 
 [node name="Lightning" type="Line2D"]
 self_modulate = Color(2, 2, 2, 1)
-z_index = 1000
+z_index = 999
 width = 1.0
 width_curve = SubResource("Curve_572xd")
 default_color = Color(0.482353, 0.662745, 1, 1)
@@ -102,7 +106,7 @@ segments = 16
 [node name="Sparks" type="CPUParticles2D" parent="."]
 position = Vector2(0, -1)
 emitting = false
-amount = 12
+amount = 18
 lifetime = 0.8
 one_shot = true
 explosiveness = 1.0
@@ -112,7 +116,7 @@ direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 50.0
-initial_velocity_max = 50.0
+initial_velocity_max = 65.0
 angular_velocity_min = 128.0
 angular_velocity_max = 128.0
 damping_min = 100.0
@@ -120,7 +124,7 @@ damping_max = 100.0
 angle_min = 4.0
 angle_max = 4.0
 scale_amount_curve = SubResource("Curve_6ky67")
-color = Color(0.482353, 0.662745, 1, 1)
+color_ramp = SubResource("Gradient_m6ttr")
 
 [node name="HitBox" parent="Sparks" instance=ExtResource("2_ntkna")]
 damage = 1
@@ -132,9 +136,8 @@ debug_color = Color(0, 0.647059, 0, 0.419608)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(100, 0)
-collision_mask = 32
+collision_mask = 33
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "create"

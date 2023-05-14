@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GameState" load_steps=2 format=3 uid="uid://dl3frq2816cp3"]
+
+[ext_resource type="Script" path="res://resources/game_state.gd" id="1_rxd51"]
+
+[resource]
+script = ExtResource("1_rxd51")
+state = 0

@@ -45,6 +45,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		anim.play("idle")
 
 
-func _on_attack_range_area_entered(_area: Area2D) -> void:
+func _on_attack_range_body_entered(_body: Node2D) -> void:
+	print("HOHO")
 	anim.play("attack")
 	target = Vector2.ZERO

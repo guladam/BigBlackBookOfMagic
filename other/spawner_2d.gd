@@ -8,7 +8,7 @@ signal spawned(entity)
 func _ready() -> void:
 	await get_tree().create_timer(2).timeout
 	var imp := spawn()
-	imp.start_attacking($Castle.global_position)
+	imp.start_attacking(global_position + Vector2(500, 0))
 
 
 func get_random_spread() -> Vector2:
