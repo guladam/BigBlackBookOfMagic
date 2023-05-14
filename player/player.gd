@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var speed = 300.0
 @export var gravity: int = 10
 @export_range(0.0, 1.0) var spell_similarity_threshold := 0.8
@@ -10,7 +9,7 @@ extends CharacterBody2D
 @onready var anim := $AnimationPlayer
 @onready var spell_book: SpellBook = $SpellBook
 @onready var aim: Node2D = $Aim
-
+@onready var mana: Node = $Mana
 
 func _physics_process(delta: float) -> void:
 	if not can_act():
@@ -40,7 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("cast_spell"):
-		spell_book.cast_spell(aim.get_current_aim())
+		spell_book.cast_spell(aim.get_current_aim(), mana)
 
 
 func _on_spell_drawn(spell_name: String, similarity: float) -> void:

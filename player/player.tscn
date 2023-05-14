@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6tajrj8qdcep"]
+[gd_scene load_steps=12 format=3 uid="uid://c6tajrj8qdcep"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_egeqk"]
 [ext_resource type="Texture2D" uid="uid://baaprf5ad3xxs" path="res://test_stuff/AnimationSheet_Character.png" id="1_s4kxp"]
 [ext_resource type="Script" path="res://player/spellbook.gd" id="3_e87di"]
 [ext_resource type="Script" path="res://player/aim.gd" id="4_652s5"]
 [ext_resource type="Texture2D" uid="uid://b31kjqgssa1i" path="res://player/crosshair.png" id="5_qwdjq"]
+[ext_resource type="PackedScene" uid="uid://dajse6u2sm5qe" path="res://other/mana.tscn" id="6_7cgt6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u17po"]
 size = Vector2(13, 24)
@@ -95,6 +96,9 @@ z_index = 999
 position = Vector2(0, -100)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_qwdjq")
+
+[node name="Mana" parent="." instance=ExtResource("6_7cgt6")]
+mana_regen_per_second = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"

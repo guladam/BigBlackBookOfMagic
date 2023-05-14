@@ -128,10 +128,10 @@ hframes = 12
 frame = 6
 
 [node name="HitBox" parent="Sprite2D" index="0"]
-damage = 2
+position = Vector2(39.5, -11.5)
+damage = 5
 
 [node name="CollisionShape2D" parent="Sprite2D/HitBox" index="0"]
-position = Vector2(39.5, -11.5)
 shape = SubResource("RectangleShape2D_3y2lw")
 disabled = true
 

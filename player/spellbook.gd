@@ -1,6 +1,8 @@
 extends Node2D
 class_name SpellBook
 
+signal not_enough_mana
+
 # TODO menő resource loading pluginnal
 const SPELLS = {
 	"zap": preload("res://spells/zap/zap.tscn")
@@ -19,7 +21,7 @@ func change_to_spell(new_spell: String) -> Spell:
 	return spell
 
 
-func cast_spell(target: Vector2) -> void:
+func cast_spell(target: Vector2, current_mana: Mana) -> void:
 	if get_child_count() == 0:
 		return
 	
@@ -27,4 +29,10 @@ func cast_spell(target: Vector2) -> void:
 	if not spell:
 		return
 	
+	
+	if current_mana.mana < spell.mana_cost:
+		not_enough_mana.emit()
+		return
+	
+	current_mana.mana -= spell.mana_cost 
 	spell.cast_towards(target)

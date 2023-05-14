@@ -11,6 +11,9 @@ enum HITBOX_TYPE {
 
 func _init() -> void:
 	collision_mask = 0
+
+
+func _ready() -> void:
 	match type:
 		HITBOX_TYPE.PLAYER:
 			collision_layer = 4

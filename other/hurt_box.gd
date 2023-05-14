@@ -5,14 +5,14 @@ extends Area2D
 
 func _init() -> void:
 	monitorable = false
+
+
+func _ready() -> void:
 	match damaged_by:
 		HitBox.HITBOX_TYPE.PLAYER:
 			collision_mask = 4
 		HitBox.HITBOX_TYPE.ENEMIES:
 			collision_mask = 8
-
-
-func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
 
