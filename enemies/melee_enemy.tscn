@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkxkkv0i3ju5h"]
+
+[ext_resource type="Script" path="res://other/hit_box.gd" id="1_wy8bj"]
+[ext_resource type="Script" path="res://enemies/melee_enemy.gd" id="1_y8wi1"]
+[ext_resource type="Script" path="res://other/hurt_box.gd" id="2_61ff0"]
+[ext_resource type="PackedScene" uid="uid://bd3xmx66156kc" path="res://other/health.tscn" id="4_lw6mm"]
+
+[node name="MeleeEnemy" type="Area2D"]
+script = ExtResource("1_y8wi1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="HitBox" type="Area2D" parent="Sprite2D"]
+script = ExtResource("1_wy8bj")
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitBox"]
+debug_color = Color(0, 0.639216, 0.352941, 0.419608)
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("2_61ff0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+debug_color = Color(0.988235, 0, 0, 0.419608)
+
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+
+[node name="Health" parent="." instance=ExtResource("4_lw6mm")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

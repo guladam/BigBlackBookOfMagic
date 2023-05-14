@@ -1,0 +1,159 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8723cjggejcv"]
+
+[ext_resource type="PackedScene" uid="uid://dkxkkv0i3ju5h" path="res://enemies/melee_enemy.tscn" id="1_lrtld"]
+[ext_resource type="Texture2D" uid="uid://compfio64dipa" path="res://test_stuff/demon_axe_red/spritesheet (1).png" id="2_3e3v3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mbo4"]
+size = Vector2(18, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3y2lw"]
+size = Vector2(13, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdchm"]
+size = Vector2(18, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slipj"]
+size = Vector2(90, 20)
+
+[sub_resource type="Animation" id="Animation_1co61"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hovkl"]
+resource_name = "attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_uolfj"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_qk0yy"]
+resource_name = "walk"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_my2a1"]
+_data = {
+"RESET": SubResource("Animation_1co61"),
+"attack": SubResource("Animation_hovkl"),
+"idle": SubResource("Animation_uolfj"),
+"walk": SubResource("Animation_qk0yy")
+}
+
+[node name="Imp" instance=ExtResource("1_lrtld")]
+collision_layer = 32
+collision_mask = 0
+speed = 75
+attack_cooldown_seconds = 1.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_1mbo4")
+debug_color = Color(0.447059, 0.380392, 0.00784314, 0.682353)
+
+[node name="Sprite2D" parent="." index="1"]
+texture_filter = 1
+texture = ExtResource("2_3e3v3")
+offset = Vector2(0, -15)
+hframes = 12
+frame = 6
+
+[node name="HitBox" parent="Sprite2D" index="0"]
+damage = 2
+
+[node name="CollisionShape2D" parent="Sprite2D/HitBox" index="0"]
+position = Vector2(39.5, -11.5)
+shape = SubResource("RectangleShape2D_3y2lw")
+disabled = true
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_gdchm")
+
+[node name="AttackRange" parent="." index="3"]
+position = Vector2(0, -5)
+
+[node name="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource("RectangleShape2D_slipj")
+
+[node name="Health" parent="." index="4"]
+health = 9
+
+[node name="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_my2a1")
+}
+
+[connection signal="area_entered" from="AttackRange" to="." method="_on_attack_range_area_entered"]

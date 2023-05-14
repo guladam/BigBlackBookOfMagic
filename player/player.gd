@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("cast_spell"):
 		spell_book.cast_spell(aim.get_current_aim())
-		print("ZAP")
 
 
 func _on_spell_drawn(spell_name: String, similarity: float) -> void:

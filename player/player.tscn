@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://baaprf5ad3xxs" path="res://test_stuff/AnimationSheet_Character.png" id="1_s4kxp"]
 [ext_resource type="Script" path="res://player/spellbook.gd" id="3_e87di"]
 [ext_resource type="Script" path="res://player/aim.gd" id="4_652s5"]
-[ext_resource type="Texture2D" uid="uid://cigvn1a8186dk" path="res://test_stuff/circle.png" id="4_ryj6g"]
+[ext_resource type="Texture2D" uid="uid://b31kjqgssa1i" path="res://player/crosshair.png" id="5_qwdjq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u17po"]
 size = Vector2(13, 24)
@@ -79,6 +79,7 @@ region_rect = Rect2(0, 96, 32, 32)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 4)
 shape = SubResource("RectangleShape2D_u17po")
+debug_color = Color(0, 0.6, 0.701961, 0.207843)
 
 [node name="SpellBook" type="Node2D" parent="."]
 position = Vector2(13, 0)
@@ -91,8 +92,8 @@ script = ExtResource("4_652s5")
 [node name="Crosshair" type="Sprite2D" parent="Aim"]
 z_index = 999
 position = Vector2(0, -100)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_ryj6g")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_qwdjq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgrhj2k3eb4f2"]
+[gd_scene load_steps=16 format=3 uid="uid://bgrhj2k3eb4f2"]
 
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
 [ext_resource type="Texture2D" uid="uid://dkim7n2idgpiv" path="res://test_stuff/DarkForest1.2/bgrd_tree1.png" id="2_fibin"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cixfgbiwysqqe" path="res://test_stuff/DarkForest1.2/env_ground.png" id="7_mb7ig"]
 [ext_resource type="PackedScene" uid="uid://c6tajrj8qdcep" path="res://player/player.tscn" id="8_yqb23"]
 [ext_resource type="PackedScene" uid="uid://cabxhw4h71uap" path="res://spellcasting/gesture_recognizer.tscn" id="9_bi1ni"]
+[ext_resource type="PackedScene" uid="uid://b7b3yll0ymfgh" path="res://other/spawner_2d.tscn" id="9_ecwuq"]
+[ext_resource type="PackedScene" uid="uid://c8723cjggejcv" path="res://enemies/imp/imp.tscn" id="10_lfiys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87i5p"]
 texture = ExtResource("7_mb7ig")
@@ -1556,6 +1558,9 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_87i5p")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxfnw"]
+size = Vector2(20, 51)
+
 [sub_resource type="Environment" id="Environment_e1e1l"]
 background_mode = 3
 glow_enabled = true
@@ -1607,7 +1612,21 @@ position = Vector2(528, 476)
 spell_similarity_threshold = 0.75
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.25, 1.25)
+
+[node name="Spawner2D" parent="." instance=ExtResource("9_ecwuq")]
+position = Vector2(168, 523)
+gizmo_extents = 15.0
+spawn_scene = ExtResource("10_lfiys")
+
+[node name="Castle" type="Area2D" parent="Spawner2D"]
+position = Vector2(284, -1)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner2D/Castle"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_cxfnw")
 
 [node name="DrawingLayer" type="CanvasLayer" parent="."]
 
