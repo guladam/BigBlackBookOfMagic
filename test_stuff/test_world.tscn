@@ -7325,35 +7325,20 @@ tracks/0/path = NodePath("EnemySpawner")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 4, 6, 10, 11, 12, 13, 20),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(2, 8, 18, 22),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
-"method": &"spawn_random"
+"method": &"spawn_everywhere"
 }, {
 "args": [],
 "method": &"spawn_everywhere"
+}, {
+"args": [],
+"method": &"spawn_random"
+}, {
+"args": [],
+"method": &"spawn_random"
 }]
 }
 
@@ -7507,7 +7492,7 @@ position = Vector2(585, 168)
 destination = NodePath("../Teleport3")
 
 [node name="Player" parent="." instance=ExtResource("8_yqb23")]
-position = Vector2(544, 432)
+position = Vector2(560, 125)
 gravity = 1500
 spell_similarity_threshold = 0.75
 game_state = ExtResource("9_k18fd")

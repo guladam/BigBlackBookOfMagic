@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 window/size/viewport_width=640
 window/size/viewport_height=320
 window/size/mode=2
+window/size/initial_position_type=2
+window/size/initial_screen=2
 window/stretch/mode="canvas_items"
 
 [input]
