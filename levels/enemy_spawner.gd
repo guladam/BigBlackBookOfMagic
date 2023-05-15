@@ -1,5 +1,6 @@
 extends Node
 
+signal spawned(entity)
 
 @onready var spawn_points: Array[Node] = self.get_children()
 var last_spawn_point
@@ -7,6 +8,9 @@ var last_spawn_point
 
 func _ready() -> void:
 	randomize()
+	
+	for spawn_point in spawn_points:
+		spawn_point.spawned.connect(func(entity): spawned.emit(entity))
 
 
 func spawn_random() -> void:

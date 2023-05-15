@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bgrhj2k3eb4f2"]
+[gd_scene load_steps=36 format=3 uid="uid://bgrhj2k3eb4f2"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0j1gl"]
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
@@ -21,8 +21,10 @@
 [ext_resource type="PackedScene" uid="uid://b56riik0247iv" path="res://castle/teleport.tscn" id="15_lr70r"]
 [ext_resource type="Script" path="res://levels/event_player.gd" id="16_8bht2"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="17_skmm2"]
-[ext_resource type="Script" path="res://ui/hud/castle_hp.gd" id="19_x44bk"]
-[ext_resource type="Script" path="res://ui/hud/mana_bar.gd" id="20_saw4v"]
+[ext_resource type="PackedScene" uid="uid://oaa6v5rkuldp" path="res://ui/hud/castle_hp.tscn" id="22_w4veu"]
+[ext_resource type="PackedScene" uid="uid://dxpys83macsdh" path="res://ui/hud/mana_bar.tscn" id="23_1xsbg"]
+[ext_resource type="Script" path="res://ui/hud/enemy_indicators.gd" id="24_kc62h"]
+[ext_resource type="PackedScene" uid="uid://7d1fuu8jmiv3" path="res://ui/hud/enemy_indicator.tscn" id="25_jrlik"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87i5p"]
 texture = ExtResource("7_mb7ig")
@@ -7511,7 +7513,6 @@ spell_similarity_threshold = 0.75
 game_state = ExtResource("9_k18fd")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.7, 0.7)
 
 [node name="EventPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -7578,11 +7579,8 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="CastleHP" type="ProgressBar" parent="HUD/MarginContainer" node_paths=PackedStringArray("castle_hp")]
-custom_minimum_size = Vector2(175, 0)
+[node name="CastleHP" parent="HUD/MarginContainer" node_paths=PackedStringArray("castle_hp") instance=ExtResource("22_w4veu")]
 layout_mode = 2
-value = 100.0
-script = ExtResource("19_x44bk")
 castle_hp = NodePath("../../../Castle/Health")
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUD"]
@@ -7595,17 +7593,27 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 10
 
-[node name="ManaBar" type="ProgressBar" parent="HUD/MarginContainer2" node_paths=PackedStringArray("player_mana")]
-custom_minimum_size = Vector2(175, 0)
+[node name="ManaBar" parent="HUD/MarginContainer2" node_paths=PackedStringArray("player_mana") instance=ExtResource("23_1xsbg")]
 layout_mode = 2
-size_flags_horizontal = 8
-value = 100.0
-script = ExtResource("20_saw4v")
 player_mana = NodePath("../../../Player/Mana")
+
+[node name="EnemyIndicators" type="Control" parent="HUD" node_paths=PackedStringArray("camera")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("24_kc62h")
+indicator = ExtResource("25_jrlik")
+camera = NodePath("../../Player/Camera2D")
+margin = Vector2(16, 16)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e1e1l")
 
+[connection signal="spawned" from="EnemySpawner" to="HUD/EnemyIndicators" method="show_indicator"]
 [connection signal="shape_detected" from="DrawingLayer/GestureRecognizer" to="Player" method="_on_spell_drawn"]
 
 [editable path="Player"]

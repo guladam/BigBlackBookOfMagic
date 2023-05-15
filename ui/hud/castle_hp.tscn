@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://oaa6v5rkuldp"]
+
+[ext_resource type="Script" path="res://ui/hud/castle_hp.gd" id="1_o8v5t"]
+
+[node name="CastleHP" type="ProgressBar"]
+custom_minimum_size = Vector2(175, 0)
+value = 100.0
+script = ExtResource("1_o8v5t")
