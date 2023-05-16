@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://other/hurt_box.gd" id="2_61ff0"]
 [ext_resource type="PackedScene" uid="uid://bd3xmx66156kc" path="res://other/health.tscn" id="4_lw6mm"]
 
-[node name="MeleeEnemy" type="Area2D"]
+[node name="MeleeEnemy" type="Area2D" groups=["enemies"]]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_y8wi1")

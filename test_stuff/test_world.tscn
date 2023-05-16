@@ -7317,7 +7317,7 @@ size = Vector2(146, 26)
 
 [sub_resource type="Animation" id="Animation_jayrp"]
 resource_name = "wave_1"
-length = 45.0
+length = 30.0
 step = 1.0
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -7345,7 +7345,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_7881v"]
 resource_name = "wave_2"
-length = 60.0
+length = 35.0
 step = 1.0
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -7608,6 +7608,7 @@ margin = Vector2(16, 16)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e1e1l")
 
+[connection signal="castle_destroyed" from="Castle" to="." method="_on_castle_castle_destroyed"]
 [connection signal="spawned" from="EnemySpawner" to="HUD/EnemyIndicators" method="show_indicator"]
 [connection signal="shape_detected" from="DrawingLayer/GestureRecognizer" to="Player" method="_on_spell_drawn"]
 [connection signal="shape_detected" from="DrawingLayer/GestureRecognizer" to="DrawingLayer" method="_on_gesture_recognizer_shape_detected"]

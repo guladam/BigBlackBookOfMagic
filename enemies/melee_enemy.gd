@@ -1,5 +1,7 @@
 extends Area2D
 
+signal died
+
 @export var speed := 200
 @export var attack_cooldown_seconds := 1.5
 
@@ -38,6 +40,7 @@ func start_attacking(_target: Vector2) -> void:
 func take_damage(damage: int) -> void:
 	health.health -= damage
 	if health.health <= 0:
+		died.emit()
 		queue_free()
 
 

@@ -5,8 +5,7 @@ extends AnimationPlayer
 
 func play_event(event_index := current_event) -> void:
 	var events_list: Array = get_animation_list()
-	var animation_count := events_list.size()
-	if event_index >= animation_count:
+	if event_index >= events:
 		return
 	play(events_list[event_index])
 	print("playing event %s" % event_index)
