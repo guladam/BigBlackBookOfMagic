@@ -2,12 +2,13 @@ extends Area2D
 class_name Teleport
 
 @export var destination: Teleport
+@export var game_state: GameState
 
 var _can_use := false
 var _character: Node2D
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("use_item") and destination and _can_use and _character:
+	if event.is_action_pressed("use_item") and destination and _can_use and _character and game_state.state == GameState.STATES.PLAYING:
 		# TODO animate this in a cool way,
 		# maybe also use particle effects
 		_character.global_position = destination.global_position

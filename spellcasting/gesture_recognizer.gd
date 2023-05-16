@@ -56,7 +56,7 @@ func _ready():
 	if ink_loss_rate > 0:
 		set_process(true)
 	
-	queue_redraw()
+	update_gesture()
 
 
 func _process(delta):
@@ -74,26 +74,19 @@ func _process(delta):
 		current_ink -= ink_loss_rate * delta
 	
 	if current_ink < max_ink: 
-		queue_redraw()
+		update_gesture()
 	
 	if current_ink < 0:
 		current_ink = 0
 
 
 func _input(event):	
-	if not can_draw or not InputMap.has_action(input_action):
+	if not visible or not InputMap.has_action(input_action):
 		return
 
 	# on first press
 	if event.is_action_pressed(input_action):
-		drawing = []
-		pressed = event.pressed
-		current_position = get_local_mouse_position()
-		
-		if draw_particle and drawing.size() < max_rec_points:
-			draw_particle.set_emitting(true)
-			draw_particle.set_position(current_position)
-			
+		start_drawing(event)
 	
 	# while pressed
 	if event is InputEventMouseMotion and pressed:
@@ -113,7 +106,7 @@ func _input(event):
 			
 		# update the drawing at every second point
 		if drawing.size() % 2:
-			queue_redraw()
+			update_gesture()
 			
 		if ink_loss_rate == 0:
 			current_ink -= 0.01
@@ -126,7 +119,7 @@ func _input(event):
 			recognize_drawn_gesture()
 
 
-func _draw():
+func update_gesture():
 	if drawing.size() <= 0 or not line:
 		return
 	
@@ -166,6 +159,17 @@ func _on_add_gesture_pressed():
 	drawing = []
 
 
+func start_drawing(event: InputEvent) -> void:
+	current_ink = max_ink
+	drawing = []
+	pressed = event.pressed
+	current_position = get_local_mouse_position()
+		
+	if draw_particle and drawing.size() < max_rec_points:
+		draw_particle.set_emitting(true)
+		draw_particle.set_position(current_position)
+
+
 func recognize_drawn_gesture():
 	if draw_particle:
 		draw_particle.set_position(current_position)
@@ -191,11 +195,14 @@ func recognize_drawn_gesture():
 	if ink_loss_rate == 0:
 		current_ink = max_ink
 		
-	queue_redraw()
+	update_gesture()
 	
 	if not recording:
 		drawing = []
-	
+		line.points = []
+		
+	can_draw =  false
+
 
 func save_gestures():
 	data = {}

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cabxhw4h71uap"]
+[gd_scene load_steps=5 format=3 uid="uid://bxetau4y4g62m"]
 
-[ext_resource type="Script" path="res://spellcasting/gesture_recognizer.gd" id="1_ovbns"]
+[ext_resource type="Script" path="res://spellcasting/gesture_recognizer.gd" id="1_hejkn"]
+[ext_resource type="PackedScene" uid="uid://c13ejy0x47w5q" path="res://spellcasting/debug_gui.tscn" id="2_6gnmm"]
 
 [sub_resource type="Curve" id="Curve_62pdv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.327273), -1.3139, 0.0, 0, 0]
@@ -17,39 +18,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ovbns")
+script = ExtResource("1_hejkn")
 input_action = "draw_spell"
 max_ink = 10.0
 draw_particle = NodePath("CPUParticles2D")
-debug = NodePath("")
+debug = NodePath("DebugGUI")
 progress = NodePath("ProgressBar")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.521569)
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -100.0
-offset_right = 40.0
-offset_bottom = 100.0
-grow_vertical = 2
-fill_mode = 3
-
-[node name="Line2D" type="Line2D" parent="."]
-width = 6.0
-default_color = Color(0.858824, 0, 0.521569, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="DebugGUI" parent="." instance=ExtResource("2_6gnmm")]
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 31.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
@@ -67,3 +52,19 @@ scale_amount_min = 2.2
 scale_amount_max = 2.2
 scale_amount_curve = SubResource("Curve_62pdv")
 color_ramp = SubResource("Gradient_0oexs")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 6.0
+default_color = Color(0.858824, 0, 0.521569, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 27.0
+grow_horizontal = 0

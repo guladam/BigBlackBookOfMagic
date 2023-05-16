@@ -1,12 +1,21 @@
 extends Node2D
 
-@export var smoothing := 50
-@onready var crosshair: Sprite2D = $Crosshair
-var angle = 0.0
 
-func _process(delta: float) -> void:
-	angle = get_parent().get_local_mouse_position().normalized().angle() + PI / 2
-	rotation = lerp_angle(rotation, angle, smoothing * delta)
+@onready var crosshair: Sprite2D = $Crosshair
+@onready var max_range := absf(self.crosshair.position.y)
+@onready var min_range := 40
+
+var mouse: Vector2
+
+func _process(_delta: float) -> void:
+	mouse = get_parent().get_local_mouse_position()
+	
+	if mouse.length() > max_range:
+		crosshair.position = mouse.normalized() * max_range
+	elif mouse.length() < min_range:
+		crosshair.position = mouse.normalized() * min_range
+	else:
+		crosshair.position = mouse
 
 
 func get_current_aim() -> Vector2:
@@ -14,5 +23,5 @@ func get_current_aim() -> Vector2:
 
 
 func change_crosshair_range(new_range: float) -> void:
-	crosshair.position.y = -new_range
+	max_range = new_range
 	

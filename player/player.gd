@@ -11,6 +11,12 @@ extends CharacterBody2D
 @onready var aim: Node2D = $Aim
 @onready var mana: Node = $Mana
 
+
+func _ready() -> void:
+	game_state.game_state_changed.connect(_on_game_state_changed)
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+
+
 func _physics_process(delta: float) -> void:
 	if not can_act():
 		return
@@ -47,6 +53,14 @@ func _on_spell_drawn(spell_name: String, similarity: float) -> void:
 		var new_spell: Spell = spell_book.change_to_spell(spell_name)
 		if new_spell.cast_range > 0:
 			aim.change_crosshair_range(new_spell.cast_range)
+
+
+func _on_game_state_changed(new_state: GameState.STATES) -> void:
+	aim.visible = new_state == GameState.STATES.PLAYING
+	if new_state == GameState.STATES.PLAYING:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func can_act() -> bool:

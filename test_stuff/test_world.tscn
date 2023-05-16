@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bgrhj2k3eb4f2"]
+[gd_scene load_steps=37 format=3 uid="uid://bgrhj2k3eb4f2"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0j1gl"]
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://b56riik0247iv" path="res://castle/teleport.tscn" id="15_lr70r"]
 [ext_resource type="Script" path="res://levels/event_player.gd" id="16_8bht2"]
 [ext_resource type="Script" path="res://levels/enemy_spawner.gd" id="17_skmm2"]
+[ext_resource type="Script" path="res://spellcasting/drawing_layer.gd" id="21_ykvib"]
 [ext_resource type="PackedScene" uid="uid://oaa6v5rkuldp" path="res://ui/hud/castle_hp.tscn" id="22_w4veu"]
 [ext_resource type="PackedScene" uid="uid://dxpys83macsdh" path="res://ui/hud/mana_bar.tscn" id="23_1xsbg"]
 [ext_resource type="Script" path="res://ui/hud/enemy_indicators.gd" id="24_kc62h"]
@@ -7476,20 +7477,24 @@ debug_color = Color(1, 0, 0, 0.258824)
 [node name="Teleport" parent="Castle" node_paths=PackedStringArray("destination") instance=ExtResource("15_lr70r")]
 position = Vector2(736, 536)
 destination = NodePath("../Teleport2")
+game_state = ExtResource("9_k18fd")
 
 [node name="Teleport2" parent="Castle" node_paths=PackedStringArray("destination") instance=ExtResource("15_lr70r")]
 position = Vector2(632, 376)
 destination = NodePath("../Teleport")
+game_state = ExtResource("9_k18fd")
 
 [node name="Teleport3" parent="Castle" node_paths=PackedStringArray("destination") instance=ExtResource("15_lr70r")]
 modulate = Color(1.29, 1.18, 0, 1)
 position = Vector2(468, 376)
 destination = NodePath("../Teleport4")
+game_state = ExtResource("9_k18fd")
 
 [node name="Teleport4" parent="Castle" node_paths=PackedStringArray("destination") instance=ExtResource("15_lr70r")]
 modulate = Color(1.29, 1.18, 0, 1)
 position = Vector2(585, 168)
 destination = NodePath("../Teleport3")
+game_state = ExtResource("9_k18fd")
 
 [node name="Player" parent="." instance=ExtResource("8_yqb23")]
 position = Vector2(560, 125)
@@ -7545,8 +7550,11 @@ target = NodePath("Target")
 position = Vector2(-265, 0)
 
 [node name="DrawingLayer" type="CanvasLayer" parent="."]
+script = ExtResource("21_ykvib")
+game_state = ExtResource("9_k18fd")
 
 [node name="GestureRecognizer" parent="DrawingLayer" instance=ExtResource("9_bi1ni")]
+visible = false
 recording = false
 create_collisions = false
 
@@ -7566,6 +7574,7 @@ grow_vertical = 0
 
 [node name="CastleHP" parent="HUD/MarginContainer" node_paths=PackedStringArray("castle_hp") instance=ExtResource("22_w4veu")]
 layout_mode = 2
+mouse_filter = 2
 castle_hp = NodePath("../../../Castle/Health")
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUD"]
@@ -7580,6 +7589,7 @@ theme_override_constants/margin_top = 10
 
 [node name="ManaBar" parent="HUD/MarginContainer2" node_paths=PackedStringArray("player_mana") instance=ExtResource("23_1xsbg")]
 layout_mode = 2
+mouse_filter = 2
 player_mana = NodePath("../../../Player/Mana")
 
 [node name="EnemyIndicators" type="Control" parent="HUD" node_paths=PackedStringArray("camera")]
@@ -7600,6 +7610,6 @@ environment = SubResource("Environment_e1e1l")
 
 [connection signal="spawned" from="EnemySpawner" to="HUD/EnemyIndicators" method="show_indicator"]
 [connection signal="shape_detected" from="DrawingLayer/GestureRecognizer" to="Player" method="_on_spell_drawn"]
+[connection signal="shape_detected" from="DrawingLayer/GestureRecognizer" to="DrawingLayer" method="_on_gesture_recognizer_shape_detected"]
 
 [editable path="Player"]
-[editable path="DrawingLayer/GestureRecognizer"]
