@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm4ifg5n3k6a1"]
+
+[ext_resource type="Script" path="res://global/sfx_player.gd" id="1_indoq"]
+
+[node name="SfxPlayer" type="Node"]
+script = ExtResource("1_indoq")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="Players"]
+bus = &"SFX"

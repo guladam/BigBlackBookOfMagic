@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://oq4h3wjdpl5i"]
+
+[ext_resource type="Script" path="res://global/music_player.gd" id="1_khp8j"]
+
+[node name="MusicPlayer" type="Node"]
+script = ExtResource("1_khp8j")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Players"]
+volume_db = -80.0
+bus = &"Music"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Players"]
+volume_db = -80.0
+bus = &"Music"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Players"]
+volume_db = -80.0
+bus = &"Music"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="Players"]
+volume_db = -80.0
+bus = &"Music"

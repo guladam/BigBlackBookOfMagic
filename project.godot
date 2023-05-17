@@ -15,6 +15,11 @@ run/main_scene="res://test_stuff/test_world.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+MusicPlayer="*res://global/music_player.tscn"
+SfxPlayer="*res://global/sfx_player.tscn"
+
 [display]
 
 window/size/viewport_width=640

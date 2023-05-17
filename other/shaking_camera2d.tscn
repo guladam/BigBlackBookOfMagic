@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmdqsveyafreo"]
+
+[ext_resource type="Script" path="res://other/shaking_camera2d.gd" id="1_68jlm"]
+
+[node name="ShakingCamera2D" type="Camera2D"]
+script = ExtResource("1_68jlm")
