@@ -1,6 +1,7 @@
 extends Sprite2D
 class_name Spell
 
+@export var spell_name: String
 @export var cast_range := 150
 @export var mana_cost := 20
 
