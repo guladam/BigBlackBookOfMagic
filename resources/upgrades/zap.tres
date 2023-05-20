@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=5 format=3 uid="uid://durhtkd3f71s"]
+
+[ext_resource type="Texture2D" uid="uid://de83c5qylyxi5" path="res://ui/icons/zap.png" id="1_grfke"]
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="1_x7v2t"]
+[ext_resource type="Texture2D" uid="uid://cau3urax6012q" path="res://ui/icons/zap_hovered.png" id="2_4olh8"]
+[ext_resource type="PackedScene" uid="uid://bb3xaw0v5v8e6" path="res://spells/zap/zap.tscn" id="2_k1qix"]
+
+[resource]
+script = ExtResource("1_x7v2t")
+base_img = ExtResource("1_grfke")
+hover_img = ExtResource("2_4olh8")
+type = 0
+upgrade_name = "Zap"
+short_description = "Deals short bursts of lightning damage. (Charges: 4)"
+spell = ExtResource("2_k1qix")
+upgrade_number = 0.0

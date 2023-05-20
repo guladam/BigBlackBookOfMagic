@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://co72jrkmee8do"]
+
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="1_2hhko"]
+[ext_resource type="Texture2D" uid="uid://v1q6euvj35lb" path="res://ui/icons/ice_bolt.png" id="1_r83go"]
+[ext_resource type="Texture2D" uid="uid://cldogeos10ql5" path="res://ui/icons/ice_bolt_hovered.png" id="2_floih"]
+
+[resource]
+script = ExtResource("1_2hhko")
+base_img = ExtResource("1_r83go")
+hover_img = ExtResource("2_floih")
+type = 0
+upgrade_name = "Ice Bolt"
+short_description = "Deals single target damage and slows down enemy attacks.  (charges: 2)"
+upgrade_number = 0.0

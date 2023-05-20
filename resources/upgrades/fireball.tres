@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://c3iig1q560n6i"]
+
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="1_5fhgs"]
+[ext_resource type="Texture2D" uid="uid://de83c5qylyxi5" path="res://ui/icons/zap.png" id="1_mfr31"]
+[ext_resource type="Texture2D" uid="uid://cau3urax6012q" path="res://ui/icons/zap_hovered.png" id="2_drg4p"]
+
+[resource]
+script = ExtResource("1_5fhgs")
+base_img = ExtResource("1_mfr31")
+hover_img = ExtResource("2_drg4p")
+type = 0
+upgrade_name = "Fireball"
+short_description = "Deals AOE damage. (charges: 1)"
+upgrade_number = 0.0

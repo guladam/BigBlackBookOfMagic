@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://bknx65d4wvat4"]
-
-[ext_resource type="Script" path="res://resources/player_stats.gd" id="1_tm7lk"]
-
-[resource]
-script = ExtResource("1_tm7lk")
-learned_spells = Array[String]([])
-spell_drawings = 0
-spell_casts = 0

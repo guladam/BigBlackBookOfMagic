@@ -1,9 +1,11 @@
 extends Node2D
 
+@export var next_level: PackedScene
+@export var available_upgrades: Array[Upgrade]
 
 @onready var event_player: AnimationPlayer = $EventPlayer
 @onready var pause_menu: CanvasLayer = $PauseMenu
-
+@onready var spell_learning_layer: CanvasLayer = $SpellLearningLayer
 
 var check_for_win := false
 var win_check_frequency := 2.0
@@ -13,6 +15,8 @@ var last_win_check := 0.0
 func _ready() -> void:
 	event_player.play_current_event()
 	event_player.animation_finished.connect(_on_event_player_event_finished)
+	available_upgrades.shuffle()
+	spell_learning_layer.show_upgrades(available_upgrades)
 
 
 func _process(delta: float) -> void:

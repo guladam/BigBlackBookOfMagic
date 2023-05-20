@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://bok6r1cs266ve"]
+
+[ext_resource type="Texture2D" uid="uid://v1q6euvj35lb" path="res://ui/icons/ice_bolt.png" id="1_6eips"]
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="1_ndxur"]
+[ext_resource type="Texture2D" uid="uid://cldogeos10ql5" path="res://ui/icons/ice_bolt_hovered.png" id="2_74h1t"]
+
+[resource]
+script = ExtResource("1_ndxur")
+base_img = ExtResource("1_6eips")
+hover_img = ExtResource("2_74h1t")
+type = 1
+upgrade_name = "Fortify Castle"
+short_description = "Restore 10% mssing HP of your Castle."
+upgrade_number = 0.1

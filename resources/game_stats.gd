@@ -6,12 +6,16 @@ signal spell_learned(spell_name: String)
 @export var learned_spells: Array[String]
 @export var spell_drawings: Dictionary
 @export var spell_casts: Dictionary
+@export var castle_hp := 1.0
+@export var castle_repairs := 0
 
 
 func reset() -> void:
 	learned_spells.clear()
 	spell_drawings.clear()
 	spell_casts.clear()
+	castle_hp = 1.0
+	castle_repairs = 0
 
 
 func learn_spell(spell_name: String) -> void:
