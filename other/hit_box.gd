@@ -10,7 +10,7 @@ enum HITBOX_TYPE {
 }
 
 func _init() -> void:
-	collision_mask = 0
+	collision_mask = 17
 
 
 func _ready() -> void:

@@ -183,7 +183,6 @@ func recognize_drawn_gesture():
 	var gesture = recognizer.recognize(drawing)
 	var ink_left  = current_ink
 	shape_detected.emit(gesture[0], gesture[1])
-	hide()
 	
 	if recording and debug.status:
 		var msg := "%s, --ink left: %s --drawing: %s --gesture lib: %s"
@@ -200,6 +199,7 @@ func recognize_drawn_gesture():
 	if not recording:
 		drawing = []
 		line.points = []
+		hide()
 		
 	can_draw =  false
 

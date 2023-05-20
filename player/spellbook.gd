@@ -5,7 +5,10 @@ signal spell_charge_used(charges_left: int)
 
 # TODO menő resource loading pluginnal
 const SPELLS = {
-	"zap": preload("res://spells/zap/zap.tscn")
+	"magic_arrow": preload("res://spells/magic_arrow/magic_arrow.tscn"),
+	"fireball": preload("res://spells/fireball/fireball.tscn"),
+	"ice_bolt": preload("res://spells/ice_bolt/ice_bolt.tscn"),
+	"zap": preload("res://spells/zap/zap.tscn"),
 }
 
 

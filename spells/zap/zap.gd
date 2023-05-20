@@ -15,4 +15,5 @@ func cast_towards(target: Vector2) -> void:
 
 
 func destroy_spell() -> void:
+	await get_tree().create_timer(time_between_zaps * zaps + 0.1).timeout
 	queue_free()

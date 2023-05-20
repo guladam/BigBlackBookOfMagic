@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MusicPlayer="*res://global/music_player.tscn"
 SfxPlayer="*res://global/sfx_player.tscn"
+Global="*res://global/global.gd"
 
 [display]
 

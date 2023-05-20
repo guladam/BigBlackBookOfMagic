@@ -16,7 +16,6 @@ func _ready() -> void:
 	event_player.play_current_event()
 	event_player.animation_finished.connect(_on_event_player_event_finished)
 	available_upgrades.shuffle()
-	spell_learning_layer.show_upgrades(available_upgrades)
 
 
 func _process(delta: float) -> void:

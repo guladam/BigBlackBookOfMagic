@@ -69,9 +69,7 @@ _data = {
 texture_filter = 1
 collision_layer = 2
 script = ExtResource("1_egeqk")
-speed = null
 gravity = 250
-spell_similarity_threshold = null
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

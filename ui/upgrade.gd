@@ -18,4 +18,5 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	if not has_focus():
 		upgrade_icon.texture = upgrade.base_img

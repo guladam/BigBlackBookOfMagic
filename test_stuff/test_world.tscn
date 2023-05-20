@@ -7514,7 +7514,6 @@ use_sfx = ExtResource("19_rc8gw")
 
 [node name="Player" parent="." instance=ExtResource("8_yqb23")]
 position = Vector2(560, 125)
-speed = 300.0
 gravity = 1500
 spell_similarity_threshold = 0.75
 game_state = ExtResource("9_k18fd")
@@ -7614,6 +7613,7 @@ offset_left = -87.5
 offset_right = 87.5
 offset_bottom = 40.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/margin_top = 5
 
 [node name="SpellCharges" parent="HUD/MarginContainer2" node_paths=PackedStringArray("spell_book") instance=ExtResource("34_gygna")]

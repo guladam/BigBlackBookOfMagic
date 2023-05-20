@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://bpyxklsfmykdw"]
+
+[ext_resource type="Texture2D" uid="uid://cjj6avueiomfs" path="res://ui/icons/magic_tap.png" id="1_ii7v2"]
+[ext_resource type="Texture2D" uid="uid://bjifv001388yo" path="res://ui/icons/magic_tap_hovered.png" id="2_2u8l7"]
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="3_u8g8n"]
+
+[resource]
+script = ExtResource("3_u8g8n")
+base_img = ExtResource("1_ii7v2")
+hover_img = ExtResource("2_2u8l7")
+type = 0
+upgrade_name = "Hex"
+short_description = "TODO"
+upgrade_number = 0.0

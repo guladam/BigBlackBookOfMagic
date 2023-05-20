@@ -56,9 +56,21 @@ text = "Credits"
 layout_mode = 2
 text = "Quit"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Play tutorial: "
+
+[node name="Tutorial" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
 [node name="SceneChanger" parent="." instance=ExtResource("1_5xtqr")]
 
 [connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/Tutorial" to="." method="_on_tutorial_toggled"]

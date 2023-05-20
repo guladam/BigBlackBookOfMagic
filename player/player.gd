@@ -49,6 +49,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_spell_drawn(spell_name: String, similarity: float) -> void:
 	if similarity >= spell_similarity_threshold:
+		if spell_name.ends_with("_alt"):
+			spell_name = spell_name.get_slice("_alt", 0)
 		var new_spell: Spell = spell_book.change_to_spell(spell_name)
 		if new_spell.cast_range > 0:
 			aim.change_crosshair_range(new_spell.cast_range)
