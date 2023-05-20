@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dajse6u2sm5qe"]
-
-[ext_resource type="Script" path="res://other/mana.gd" id="1_xeeq0"]
-
-[node name="Mana" type="Node"]
-script = ExtResource("1_xeeq0")

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxpys83macsdh"]
-
-[ext_resource type="Script" path="res://ui/hud/mana_bar.gd" id="1_auisf"]
-
-[node name="ManaBar" type="ProgressBar"]
-custom_minimum_size = Vector2(175, 0)
-size_flags_horizontal = 8
-value = 100.0
-script = ExtResource("1_auisf")

@@ -47,5 +47,6 @@ func _on_confirm_pressed() -> void:
 	game_state.change_state(GameState.STATES.PLAYING)
 	get_tree().paused = false
 	upgrade_selected.emit(selected_upgrade)
+	# TODO actually do the thing it needs to do with the player stats
 	print("selected %s" % selected_upgrade.upgrade_name)
 	hide()

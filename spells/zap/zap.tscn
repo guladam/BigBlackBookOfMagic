@@ -9,3 +9,4 @@ script = ExtResource("2_mg0aj")
 time_between_zaps = 0.1
 zaps = 3
 spell_name = "zap"
+charges = 3

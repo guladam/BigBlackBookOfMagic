@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c27fxfae87tqq"]
+
+[ext_resource type="Script" path="res://ui/hud/spell_charges.gd" id="1_auisf"]
+
+[node name="SpellCharges" type="Label"]
+custom_minimum_size = Vector2(120, 20)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 26.0
+grow_horizontal = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_auisf")
+
+[node name="Bg" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+color = Color(0, 0, 0, 0.184314)

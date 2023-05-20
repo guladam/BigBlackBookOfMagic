@@ -93,7 +93,7 @@ _data = {
 }
 
 [node name="Lightning" type="Line2D"]
-self_modulate = Color(2, 2, 2, 1)
+self_modulate = Color(1, 1, 1, 0)
 z_index = 999
 width = 1.0
 width_curve = SubResource("Curve_572xd")

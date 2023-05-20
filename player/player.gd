@@ -9,7 +9,6 @@ extends CharacterBody2D
 @onready var anim := $AnimationPlayer
 @onready var spell_book: SpellBook = $SpellBook
 @onready var aim: Node2D = $Aim
-@onready var mana: Node = $Mana
 
 
 func _ready() -> void:
@@ -45,7 +44,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("cast_spell"):
-		spell_book.cast_spell(aim.get_current_aim(), mana)
+		spell_book.cast_spell(aim.get_current_aim())
 
 
 func _on_spell_drawn(spell_name: String, similarity: float) -> void:
@@ -53,6 +52,9 @@ func _on_spell_drawn(spell_name: String, similarity: float) -> void:
 		var new_spell: Spell = spell_book.change_to_spell(spell_name)
 		if new_spell.cast_range > 0:
 			aim.change_crosshair_range(new_spell.cast_range)
+			aim.show()
+		else:
+			aim.hide()
 
 
 func _on_game_state_changed(new_state: GameState.STATES) -> void:

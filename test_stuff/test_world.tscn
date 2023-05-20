@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bgrhj2k3eb4f2"]
+[gd_scene load_steps=47 format=3 uid="uid://cqipijlnqm635"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0j1gl"]
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://tas4m2w1bf0n" path="res://test_stuff/DarkForest1.2/bgrd_tree5.png" id="6_m8ekw"]
 [ext_resource type="Texture2D" uid="uid://cixfgbiwysqqe" path="res://test_stuff/DarkForest1.2/env_ground.png" id="7_mb7ig"]
 [ext_resource type="Texture2D" uid="uid://bcurkvpdx2ju0" path="res://test_stuff/DarkForest1.2/castle_env.png" id="8_5syn2"]
-[ext_resource type="PackedScene" uid="uid://c6tajrj8qdcep" path="res://player/player.tscn" id="8_yqb23"]
+[ext_resource type="PackedScene" uid="uid://dtirfjnlo407t" path="res://player/player.tscn" id="8_yqb23"]
 [ext_resource type="PackedScene" uid="uid://cabxhw4h71uap" path="res://spellcasting/gesture_recognizer.tscn" id="9_bi1ni"]
 [ext_resource type="PackedScene" uid="uid://b7b3yll0ymfgh" path="res://other/spawner_2d.tscn" id="9_ecwuq"]
 [ext_resource type="Texture2D" uid="uid://br1ebrlm68oas" path="res://test_stuff/DarkForest1.2/decorative_obj.png" id="9_ie22y"]
@@ -31,11 +31,11 @@
 [ext_resource type="PackedScene" uid="uid://dmdqsveyafreo" path="res://other/shaking_camera2d.tscn" id="21_b3gx4"]
 [ext_resource type="Script" path="res://spellcasting/drawing_layer.gd" id="21_ykvib"]
 [ext_resource type="PackedScene" uid="uid://oaa6v5rkuldp" path="res://ui/hud/castle_hp.tscn" id="22_w4veu"]
-[ext_resource type="PackedScene" uid="uid://dxpys83macsdh" path="res://ui/hud/mana_bar.tscn" id="23_1xsbg"]
 [ext_resource type="Script" path="res://ui/hud/enemy_indicators.gd" id="24_kc62h"]
 [ext_resource type="PackedScene" uid="uid://7d1fuu8jmiv3" path="res://ui/hud/enemy_indicator.tscn" id="25_jrlik"]
 [ext_resource type="PackedScene" uid="uid://pqqvyvpbfkng" path="res://ui/spell_learning_layer.tscn" id="28_8d67d"]
 [ext_resource type="PackedScene" uid="uid://ovuniri3cnhw" path="res://ui/pause_menu.tscn" id="28_eapkd"]
+[ext_resource type="PackedScene" uid="uid://c27fxfae87tqq" path="res://ui/hud/spell_charges.tscn" id="34_gygna"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87i5p"]
 texture = ExtResource("7_mb7ig")
@@ -7514,6 +7514,7 @@ use_sfx = ExtResource("19_rc8gw")
 
 [node name="Player" parent="." instance=ExtResource("8_yqb23")]
 position = Vector2(560, 125)
+speed = 300.0
 gravity = 1500
 spell_similarity_threshold = 0.75
 game_state = ExtResource("9_k18fd")
@@ -7613,12 +7614,11 @@ offset_left = -87.5
 offset_right = 87.5
 offset_bottom = 40.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 5
 
-[node name="ManaBar" parent="HUD/MarginContainer2" node_paths=PackedStringArray("player_mana") instance=ExtResource("23_1xsbg")]
+[node name="SpellCharges" parent="HUD/MarginContainer2" node_paths=PackedStringArray("spell_book") instance=ExtResource("34_gygna")]
 layout_mode = 2
-mouse_filter = 2
-player_mana = NodePath("../../../Player/Mana")
+spell_book = NodePath("../../../Player/SpellBook")
 
 [node name="EnemyIndicators" type="Control" parent="HUD" node_paths=PackedStringArray("camera")]
 layout_mode = 3

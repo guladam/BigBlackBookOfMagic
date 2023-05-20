@@ -1,12 +1,13 @@
 extends Node2D
 class_name SpellBook
 
-signal not_enough_mana
+signal spell_charge_used(charges_left: int)
 
 # TODO menő resource loading pluginnal
 const SPELLS = {
 	"zap": preload("res://spells/zap/zap.tscn")
 }
+
 
 func change_to_spell(new_spell: String) -> Spell:
 	for c in get_children():
@@ -16,12 +17,15 @@ func change_to_spell(new_spell: String) -> Spell:
 		print("spell not found!")
 		return
 		
-	var spell = SPELLS[new_spell].instantiate()
+	var spell: Spell = SPELLS[new_spell].instantiate()
 	add_child(spell)
+	spell.charge_used.connect(func(charges_left): spell_charge_used.emit(charges_left))
+	spell_charge_used.emit(spell.charges)
+	
 	return spell
 
 
-func cast_spell(target: Vector2, current_mana: Mana) -> void:
+func cast_spell(target: Vector2) -> void:
 	if get_child_count() == 0:
 		return
 	
@@ -29,10 +33,11 @@ func cast_spell(target: Vector2, current_mana: Mana) -> void:
 	if not spell:
 		return
 	
-	
-	if current_mana.mana < spell.mana_cost:
-		not_enough_mana.emit()
+	if spell.charges <= 0:
 		return
 	
-	current_mana.mana -= spell.mana_cost 
-	spell.cast_towards(target)
+	spell.charges -= 1
+	if spell.cast_range > 0:
+		spell.cast_towards(target)
+	else:
+		spell.cast()
