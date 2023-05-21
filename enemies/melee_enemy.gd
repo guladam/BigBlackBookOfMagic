@@ -11,11 +11,12 @@ signal died
 @onready var anim := $AnimationPlayer
 @onready var attack_cooldown := $AttackCooldown
 @onready var freeze_timer: Timer = $FreezeTimer
+@onready var random_spread_timer: Timer = $RandomSpreadTimer
 
 var target := Vector2.ZERO
 var velocity: Vector2
-
 var freeze_modifier := 1.0
+
 
 func _ready() -> void:
 	attack_cooldown.wait_time = attack_cooldown_seconds
@@ -39,8 +40,13 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_attack_range_body_entered(_body: Node2D) -> void:
-	anim.play("attack")
-	target = Vector2.ZERO
+	random_spread_timer.wait_time = randf_range(0.05, 0.3)
+	random_spread_timer.start()
+	random_spread_timer.timeout.connect(
+		func(): 
+			self.target = Vector2.ZERO
+			anim.play("attack")
+	)
 
 
 func start_attacking(_target: Vector2) -> void:

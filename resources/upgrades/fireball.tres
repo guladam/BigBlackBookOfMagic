@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Upgrade" load_steps=4 format=3 uid="uid://c3iig1q560n6i"]
+[gd_resource type="Resource" script_class="Upgrade" load_steps=5 format=3 uid="uid://c3iig1q560n6i"]
 
 [ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="1_5fhgs"]
 [ext_resource type="Texture2D" uid="uid://c1hbnh0pfrtrr" path="res://ui/icons/fireball.png" id="1_5uail"]
 [ext_resource type="Texture2D" uid="uid://o6jfyk13t85l" path="res://ui/icons/fireball_hovered.png" id="2_ksrrp"]
+[ext_resource type="PackedScene" uid="uid://cgggwwcibug6h" path="res://spells/fireball/fireball.tscn" id="4_62t57"]
 
 [resource]
 script = ExtResource("1_5fhgs")
@@ -10,5 +11,6 @@ base_img = ExtResource("1_5uail")
 hover_img = ExtResource("2_ksrrp")
 type = 0
 upgrade_name = "Fireball"
-short_description = "Deals AOE damage. (charges: 1)"
+short_description = "Deals big damage in an area. (charges: 1)"
+spell = ExtResource("4_62t57")
 upgrade_number = 0.0

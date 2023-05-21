@@ -3,6 +3,8 @@ class_name SpellBook
 
 signal spell_charge_used(charges_left: int)
 
+@export var game_stats: GameStats = preload("res://resources/game_stats.tres")
+
 # TODO menő resource loading pluginnal
 const SPELLS = {
 	"magic_arrow": preload("res://spells/magic_arrow/magic_arrow.tscn"),
@@ -25,6 +27,8 @@ func change_to_spell(new_spell: String) -> Spell:
 	spell.charge_used.connect(func(charges_left): spell_charge_used.emit(charges_left))
 	spell_charge_used.emit(spell.charges)
 	
+	game_stats.spell_drawn(spell)
+	
 	return spell
 
 
@@ -38,6 +42,8 @@ func cast_spell(target: Vector2) -> void:
 	
 	if spell.charges <= 0:
 		return
+	
+	game_stats.spell_cast(spell)
 	
 	spell.charges -= 1
 	if spell.cast_range > 0:

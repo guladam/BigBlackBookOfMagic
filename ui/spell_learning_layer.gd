@@ -3,6 +3,7 @@ extends CanvasLayer
 signal upgrade_selected(upgrade: Upgrade)
 
 @export var game_state: GameState
+@export var game_stats: GameStats = preload("res://resources/game_stats.tres")
 
 @onready var description: Label = %Description
 @onready var upgrade_name: Label = %UpgradeName
@@ -47,6 +48,4 @@ func _on_confirm_pressed() -> void:
 	game_state.change_state(GameState.STATES.PLAYING)
 	get_tree().paused = false
 	upgrade_selected.emit(selected_upgrade)
-	# TODO actually do the thing it needs to do with the player stats
-	print("selected %s" % selected_upgrade.upgrade_name)
 	hide()

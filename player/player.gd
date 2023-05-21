@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var gravity: int = 10
 @export_range(0.0, 1.0) var spell_similarity_threshold := 0.8
 @export var game_state: GameState
+@export var game_stats: GameStats = preload("res://resources/game_stats.tres")
 
 @onready var sprite := $Sprite2D
 @onready var anim := $AnimationPlayer
@@ -48,9 +49,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_spell_drawn(spell_name: String, similarity: float) -> void:
+	if spell_name.ends_with("_alt"):
+		spell_name = spell_name.get_slice("_alt", 0)
+		
+	if not game_stats.learned_spells.has(spell_name):
+		return
+	
 	if similarity >= spell_similarity_threshold:
-		if spell_name.ends_with("_alt"):
-			spell_name = spell_name.get_slice("_alt", 0)
 		var new_spell: Spell = spell_book.change_to_spell(spell_name)
 		if new_spell.cast_range > 0:
 			aim.change_crosshair_range(new_spell.cast_range)

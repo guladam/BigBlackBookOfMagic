@@ -1,5 +1,5 @@
 extends Resource
-class_name PlayerStats
+class_name GameStats
 
 signal spell_learned(spell_name: String)
 
@@ -7,15 +7,14 @@ signal spell_learned(spell_name: String)
 @export var spell_drawings: Dictionary
 @export var spell_casts: Dictionary
 @export var castle_hp := 1.0
-@export var castle_repairs := 0
 
 
 func reset() -> void:
 	learned_spells.clear()
+	learned_spells.append("magic_arrow")
 	spell_drawings.clear()
 	spell_casts.clear()
 	castle_hp = 1.0
-	castle_repairs = 0
 
 
 func learn_spell(spell_name: String) -> void:
@@ -23,11 +22,11 @@ func learn_spell(spell_name: String) -> void:
 	spell_learned.emit(spell_name)
 
 
-func _on_spell_drawn(spell: Spell) -> void:
+func spell_drawn(spell: Spell) -> void:
 	dict_create_or_increment(spell_drawings, spell.spell_name)
 
 
-func _on_spell_cast(spell: Spell) -> void:
+func spell_cast(spell: Spell) -> void:
 	dict_create_or_increment(spell_casts, spell.spell_name)
 
 

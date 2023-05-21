@@ -1,11 +1,15 @@
 extends Control
 
+@onready var game_stats: GameStats = preload("res://resources/game_stats.tres")
 @onready var scene_changer = $SceneChanger
 @onready var screens := {
 	"new_game": "res://ui/intro.tscn",
 	"options": "res://ui/options.tscn",
 	"credits": "res://ui/credits.tscn"
 }
+
+func _ready() -> void:
+	game_stats.reset()
 
 
 func _on_new_game_pressed() -> void:

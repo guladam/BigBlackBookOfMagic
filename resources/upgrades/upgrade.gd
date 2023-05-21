@@ -13,3 +13,7 @@ enum TYPE {SPELL, CASTLE_HEAL, PLAYER_STAT}
 # TODO could be split into new classes w/ inheritance
 @export var spell: PackedScene
 @export var upgrade_number: float
+
+
+func get_spell_name() -> String:
+	return upgrade_name.replace(" ", "_").to_lower()

@@ -53,3 +53,5 @@ func show_indicator(enemy: Node2D) -> void:
 	var new_indicator = indicator.instantiate()
 	add_child(new_indicator)
 	new_indicator.position = indicator_pos
+	if indicator_pos.x < viewport_size.x / 2:
+		new_indicator.flip_h = true

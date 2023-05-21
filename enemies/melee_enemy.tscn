@@ -44,6 +44,9 @@ one_shot = true
 [node name="FreezeTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="RandomSpreadTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
