@@ -16,7 +16,7 @@ signal shape_detected(gesture, ink_left)
 @export var create_collisions := true
 @export var max_drawn_col_shapes := 3
 
-@onready var gestures_file := "res://spellcasting/gestures.save"
+@onready var gestures_file := "res://spellcasting/gestures.txt"
 @onready var current_ink := max_ink
 @onready var line := $Line2D
 @onready var draw_sound: AudioStreamPlayer = $DrawSound
@@ -225,6 +225,7 @@ func load_saved_gestures(path):
 		print("loading recognizer from:", path)
 	
 	var file = FileAccess.open(gestures_file, FileAccess.READ)
+	print(file)
 	
 	# if the file is empty there's nothing to load
 	if not file or file.get_length() == 0:
