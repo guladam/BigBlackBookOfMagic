@@ -29,6 +29,7 @@ window/size/mode=2
 window/size/initial_position_type=2
 window/size/initial_screen=2
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="res://ui/images/cursor.png"
 
 [input]
 

@@ -4,6 +4,7 @@ class_name GameStats
 signal spell_learned(spell_name: String)
 
 @export var learned_spells: Array[String]
+@export var upgrades: Array[Upgrade]
 @export var spell_drawings: Dictionary
 @export var spell_casts: Dictionary
 @export var castle_hp := 1.0
@@ -11,7 +12,9 @@ signal spell_learned(spell_name: String)
 
 func reset() -> void:
 	learned_spells.clear()
+	upgrades.clear()
 	learned_spells.append("magic_arrow")
+	upgrades.append(load("res://resources/upgrades/magic_arrow.tres"))
 	spell_drawings.clear()
 	spell_casts.clear()
 	castle_hp = 1.0

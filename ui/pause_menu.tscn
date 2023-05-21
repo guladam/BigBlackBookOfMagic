@@ -26,26 +26,28 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
 [node name="PauseLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="SpellCards" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Learned spells here"
+theme_override_constants/separation = 15
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Continue"
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Mute music / sound?"
-
 [node name="Main" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Quit to Main"
 
 [connection signal="pressed" from="VBoxContainer/Continue" to="." method="unpause"]

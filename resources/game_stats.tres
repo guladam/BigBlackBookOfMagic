@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="GameStats" load_steps=2 format=3 uid="uid://bboecm7xjx6sf"]
+[gd_resource type="Resource" script_class="GameStats" load_steps=3 format=3 uid="uid://bboecm7xjx6sf"]
 
 [ext_resource type="Script" path="res://resources/game_stats.gd" id="1_tm7lk"]
+[ext_resource type="Resource" uid="uid://y86bwrc5bu0v" path="res://resources/upgrades/magic_arrow.tres" id="2_rclk4"]
 
 [resource]
 script = ExtResource("1_tm7lk")
 learned_spells = Array[String](["magic_arrow"])
+upgrades = Array[Resource("res://resources/upgrades/upgrade.gd")]([ExtResource("2_rclk4")])
 spell_drawings = {}
 spell_casts = {}
 castle_hp = 1.0

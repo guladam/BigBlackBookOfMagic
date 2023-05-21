@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://balv1mvby7j2i"]
+
+[ext_resource type="Script" path="res://ui/spell_card.gd" id="1_mmdn2"]
+[ext_resource type="Texture2D" uid="uid://o6jfyk13t85l" path="res://ui/icons/fireball_hovered.png" id="1_qb3gn"]
+
+[node name="SpellCard" type="ColorRect"]
+custom_minimum_size = Vector2(80, 110)
+offset_right = 80.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.345098)
+script = ExtResource("1_mmdn2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qb3gn")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Fireball"
+horizontal_alignment = 1
+vertical_alignment = 1

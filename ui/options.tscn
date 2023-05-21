@@ -1,28 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq1y38xd6vww7"]
+[gd_scene load_steps=7 format=3 uid="uid://dq1y38xd6vww7"]
 
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="1_macis"]
 [ext_resource type="Script" path="res://ui/options.gd" id="1_rolkx"]
 [ext_resource type="PackedScene" uid="uid://b8wxqvurrnxcr" path="res://ui/scene_changer.tscn" id="2_7agg4"]
+[ext_resource type="Texture2D" uid="uid://dj13v4iate77v" path="res://ui/images/bg.png" id="3_7kgu6"]
+[ext_resource type="PackedScene" uid="uid://cn425v1efkwoi" path="res://ui/logo.tscn" id="4_igh16"]
+[ext_resource type="Texture2D" uid="uid://b7wq6wbleip2s" path="res://ui/images/book.png" id="5_b6kf0"]
 
 [node name="Options" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_macis")
 script = ExtResource("1_rolkx")
 
+[node name="Bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_7kgu6")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Logo" parent="." instance=ExtResource("4_igh16")]
+layout_mode = 1
+
+[node name="Book" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -18.0
+offset_right = -15.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_b6kf0")
+stretch_mode = 5
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 102.0
+offset_top = -92.0
+offset_right = 298.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Options"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 25
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "SFX"
+vertical_alignment = 2
 
 [node name="Sound" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -30,10 +84,12 @@ layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Music"
+vertical_alignment = 2
 
 [node name="Music" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
@@ -41,10 +97,12 @@ layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 text = "Music volume"
+vertical_alignment = 2
 
 [node name="MusicSlider" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
@@ -54,10 +112,12 @@ size_flags_vertical = 4
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 19
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 text = "SFX volume"
+vertical_alignment = 2
 
 [node name="SoundSlider" type="HSlider" parent="VBoxContainer/HBoxContainer4"]
 unique_name_in_owner = true

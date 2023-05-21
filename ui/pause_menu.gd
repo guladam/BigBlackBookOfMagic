@@ -1,9 +1,21 @@
 extends CanvasLayer
 
 @export var game_state: GameState
+@export var game_stats: GameStats
+
 @onready var main_menu := "res://ui/main_menu.tscn"
+@onready var spell_card := preload("res://ui/spell_card.tscn")
+@onready var spell_cards: HBoxContainer = %SpellCards
 
 var prev_state: GameState.STATES
+
+
+func _ready() -> void:
+	for upgrade in game_stats.upgrades:
+		if upgrade.type == Upgrade.TYPE.SPELL:
+			var new_card = spell_card.instantiate()
+			new_card.upgrade = upgrade
+			spell_cards.add_child(new_card)
 
 
 func _unhandled_input(event: InputEvent) -> void:

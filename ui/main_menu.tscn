@@ -1,30 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://u8gat5j26tio"]
+[gd_scene load_steps=7 format=3 uid="uid://u8gat5j26tio"]
 
 [ext_resource type="PackedScene" uid="uid://b8wxqvurrnxcr" path="res://ui/scene_changer.tscn" id="1_5xtqr"]
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_ifgk0"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="1_vum6d"]
+[ext_resource type="Texture2D" uid="uid://dj13v4iate77v" path="res://ui/images/bg.png" id="3_rw5xs"]
+[ext_resource type="PackedScene" uid="uid://cn425v1efkwoi" path="res://ui/logo.tscn" id="4_4len8"]
+[ext_resource type="Texture2D" uid="uid://b7wq6wbleip2s" path="res://ui/images/book.png" id="5_fk2gf"]
 
 [node name="MainMenu" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_vum6d")
 script = ExtResource("1_ifgk0")
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rw5xs")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Logo" parent="." instance=ExtResource("4_4len8")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 366.0
+offset_bottom = 131.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Book" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -120.0
-offset_right = 20.0
-offset_bottom = -80.0
+offset_left = -315.0
+offset_top = -18.0
+offset_right = -15.0
+offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("5_fk2gf")
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -33,12 +66,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = 138.5
+offset_top = -44.0
+offset_right = 261.5
+offset_bottom = 104.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
 
 [node name="NewGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -62,6 +96,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Play tutorial: "
+vertical_alignment = 2
 
 [node name="Tutorial" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=5 format=3 uid="uid://y86bwrc5bu0v"]
+
+[ext_resource type="Texture2D" uid="uid://ccrwfwb6rcx1s" path="res://ui/icons/magic_arrow.png" id="1_7e7td"]
+[ext_resource type="Texture2D" uid="uid://dohcck2mumhyj" path="res://ui/icons/magic_arrow_hovered.png" id="2_xns5l"]
+[ext_resource type="Script" path="res://resources/upgrades/upgrade.gd" id="3_7m70p"]
+[ext_resource type="PackedScene" uid="uid://uc4woju8rr6o" path="res://spells/magic_arrow/magic_arrow.tscn" id="4_pttv1"]
+
+[resource]
+script = ExtResource("3_7m70p")
+base_img = ExtResource("1_7e7td")
+hover_img = ExtResource("2_xns5l")
+type = 0
+upgrade_name = "Magic Arrow"
+short_description = "Small projectile with moderate damage. (charges: 3)"
+spell = ExtResource("4_pttv1")
+upgrade_number = 0.0

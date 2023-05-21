@@ -1,13 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://c352vtbca2e0u"]
+[gd_scene load_steps=4 format=3 uid="uid://c352vtbca2e0u"]
 
 [ext_resource type="PackedScene" uid="uid://b8wxqvurrnxcr" path="res://ui/scene_changer.tscn" id="1_cbp5f"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="1_t3b4q"]
+[ext_resource type="Texture2D" uid="uid://dj13v4iate77v" path="res://ui/images/bg.png" id="2_8wcoa"]
 
-[node name="Credits" type="TextureRect"]
+[node name="Credits" type="Control"]
+texture_filter = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_t3b4q")
+
+[node name="Bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8wcoa")
+expand_mode = 3
+stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -26,6 +42,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Credits"
 horizontal_alignment = 1
 

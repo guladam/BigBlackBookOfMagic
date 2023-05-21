@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cqipijlnqm635"]
+[gd_scene load_steps=49 format=3 uid="uid://cqipijlnqm635"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0j1gl"]
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://7d1fuu8jmiv3" path="res://ui/hud/enemy_indicator.tscn" id="25_jrlik"]
 [ext_resource type="PackedScene" uid="uid://pqqvyvpbfkng" path="res://ui/spell_learning_layer.tscn" id="28_8d67d"]
 [ext_resource type="PackedScene" uid="uid://ovuniri3cnhw" path="res://ui/pause_menu.tscn" id="28_eapkd"]
+[ext_resource type="Resource" uid="uid://bboecm7xjx6sf" path="res://resources/game_stats.tres" id="34_a67fk"]
 [ext_resource type="PackedScene" uid="uid://c27fxfae87tqq" path="res://ui/hud/spell_charges.tscn" id="34_gygna"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87i5p"]
@@ -7575,6 +7576,7 @@ game_state = ExtResource("9_k18fd")
 [node name="PauseMenu" parent="." instance=ExtResource("28_eapkd")]
 visible = false
 game_state = ExtResource("9_k18fd")
+game_stats = ExtResource("34_a67fk")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

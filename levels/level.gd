@@ -52,6 +52,8 @@ func _on_castle_castle_destroyed() -> void:
 
 
 func _on_upgrade_selected(upgrade: Upgrade) -> void:
+	game_stats.upgrades.append(upgrade)
+	
 	match upgrade.type:
 		Upgrade.TYPE.SPELL:
 			game_stats.learn_spell(upgrade.get_spell_name())
