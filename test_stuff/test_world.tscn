@@ -7385,7 +7385,6 @@ glow_hdr_scale = 1.5
 texture_filter = 1
 script = ExtResource("1_0j1gl")
 level = 1
-next_level = null
 available_upgrades = Array[Resource("res://resources/upgrades/upgrade.gd")]([ExtResource("2_lodjo"), ExtResource("3_ryn3v"), ExtResource("4_76gq0"), ExtResource("5_dx2tn")])
 
 [node name="Background" type="Node2D" parent="."]
