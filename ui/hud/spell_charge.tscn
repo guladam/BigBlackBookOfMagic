@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://de3pwnf6sspes"]
+
+[ext_resource type="Texture2D" uid="uid://b77dr2bqkk6a8" path="res://ui/hud/spell_charge.png" id="1_gtrjg"]
+
+[node name="SpellCharge" type="TextureRect"]
+mouse_filter = 2
+texture = ExtResource("1_gtrjg")
+stretch_mode = 5

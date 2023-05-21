@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ovuniri3cnhw"]
+[gd_scene load_steps=3 format=3 uid="uid://ovuniri3cnhw"]
 
 [ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_4lp8q"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="2_sh4bc"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 2
@@ -12,9 +13,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.25098)
+color = Color(0, 0, 0, 0.705882)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,6 +28,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_sh4bc")
 theme_override_constants/separation = 10
 
 [node name="PauseLabel" type="Label" parent="VBoxContainer"]
@@ -37,6 +40,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 15
+alignment = 1
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(120, 0)

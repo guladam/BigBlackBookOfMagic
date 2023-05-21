@@ -1,11 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://csbfy2cbou7l2"]
+[gd_scene load_steps=4 format=3 uid="uid://csbfy2cbou7l2"]
 
 [ext_resource type="Script" path="res://ui/upgrade.gd" id="1_ycbpb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5nh0m"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.458824, 0.458824, 0.458824, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.505882, 0.505882, 0.505882, 0.305882)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g817k"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.976471, 0.964706, 0.721569, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.976471, 0.964706, 0.721569, 0.403922)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
 [node name="Upgrade" type="Button"]
-custom_minimum_size = Vector2(120, 200)
-offset_right = 8.0
-offset_bottom = 8.0
+custom_minimum_size = Vector2(100, 160)
+offset_right = 100.0
+offset_bottom = 160.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_5nh0m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g817k")
+theme_override_styles/focus = SubResource("StyleBoxFlat_g817k")
 script = ExtResource("1_ycbpb")
 
 [node name="Icon" type="TextureRect" parent="."]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cx6gnti534wka"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cx6gnti534wka"]
 
 [ext_resource type="FontFile" uid="uid://hhge6li2xgf7" path="res://ui/font/PixelBold.ttf" id="1_yvf30"]
 
@@ -50,6 +50,24 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdoyo"]
+content_margin_left = 2.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd0cd"]
+bg_color = Color(0.337255, 0.258824, 0.596078, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [resource]
 default_font = ExtResource("1_yvf30")
 default_font_size = 14
@@ -71,3 +89,8 @@ HSlider/icons/grabber_highlight = null
 HSlider/icons/tick = null
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_rrty5")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_rrty5")
+ProgressBar/colors/font_color = Color(1, 1, 1, 1)
+ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
+ProgressBar/colors/font_shadow_color = Color(0, 0, 0, 1)
+ProgressBar/styles/background = SubResource("StyleBoxFlat_mdoyo")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_sd0cd")

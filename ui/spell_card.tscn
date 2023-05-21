@@ -1,20 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://balv1mvby7j2i"]
+[gd_scene load_steps=5 format=3 uid="uid://balv1mvby7j2i"]
 
 [ext_resource type="Script" path="res://ui/spell_card.gd" id="1_mmdn2"]
 [ext_resource type="Texture2D" uid="uid://o6jfyk13t85l" path="res://ui/icons/fireball_hovered.png" id="1_qb3gn"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="3_suuo1"]
 
-[node name="SpellCard" type="ColorRect"]
-custom_minimum_size = Vector2(80, 110)
-offset_right = 80.0
-offset_bottom = 110.0
-color = Color(0, 0, 0, 0.345098)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pltt7"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.458824, 0.458824, 0.458824, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.505882, 0.505882, 0.505882, 0.305882)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[node name="SpellCard" type="Panel"]
+custom_minimum_size = Vector2(70, 90)
+offset_right = 70.0
+offset_bottom = 90.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pltt7")
 script = ExtResource("1_mmdn2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(70, 90)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.6667
+offset_right = 11.6667
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_qb3gn")
@@ -22,14 +43,18 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -26.0
+offset_top = -30.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Fireball"
+theme = ExtResource("3_suuo1")
+theme_override_font_sizes/font_size = 10
+text = "Magic Arrow"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2

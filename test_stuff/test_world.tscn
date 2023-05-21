@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cqipijlnqm635"]
+[gd_scene load_steps=50 format=3 uid="uid://cqipijlnqm635"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0j1gl"]
 [ext_resource type="Texture2D" uid="uid://dwuvkpihqubmw" path="res://test_stuff/DarkForest1.2/main_background.png" id="1_kl25d"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://7d1fuu8jmiv3" path="res://ui/hud/enemy_indicator.tscn" id="25_jrlik"]
 [ext_resource type="PackedScene" uid="uid://pqqvyvpbfkng" path="res://ui/spell_learning_layer.tscn" id="28_8d67d"]
 [ext_resource type="PackedScene" uid="uid://ovuniri3cnhw" path="res://ui/pause_menu.tscn" id="28_eapkd"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="31_qdsu0"]
 [ext_resource type="Resource" uid="uid://bboecm7xjx6sf" path="res://resources/game_stats.tres" id="34_a67fk"]
 [ext_resource type="PackedScene" uid="uid://c27fxfae87tqq" path="res://ui/hud/spell_charges.tscn" id="34_gygna"]
 
@@ -7558,6 +7559,47 @@ target = NodePath("Target")
 [node name="Target" type="Marker2D" parent="EnemySpawner/SpawnPoint4"]
 position = Vector2(-265, 0)
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_top = 10
+
+[node name="CastleHP" parent="HUD/MarginContainer" node_paths=PackedStringArray("castle_hp") instance=ExtResource("22_w4veu")]
+texture_filter = 1
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("31_qdsu0")
+castle_hp = NodePath("../../../Castle/Health")
+
+[node name="SpellCharges" parent="HUD" node_paths=PackedStringArray("spell_book") instance=ExtResource("34_gygna")]
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 9.0
+spell_book = NodePath("../../Player/SpellBook")
+
+[node name="EnemyIndicators" type="Control" parent="HUD" node_paths=PackedStringArray("camera")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("24_kc62h")
+indicator = ExtResource("25_jrlik")
+camera = NodePath("../../Player/ShakingCamera2D")
+margin = Vector2(16, 16)
+
 [node name="DrawingLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("shake_cam")]
 script = ExtResource("21_ykvib")
 game_state = ExtResource("9_k18fd")
@@ -7577,53 +7619,6 @@ game_state = ExtResource("9_k18fd")
 visible = false
 game_state = ExtResource("9_k18fd")
 game_stats = ExtResource("34_a67fk")
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="CastleHP" parent="HUD/MarginContainer" node_paths=PackedStringArray("castle_hp") instance=ExtResource("22_w4veu")]
-layout_mode = 2
-mouse_filter = 2
-castle_hp = NodePath("../../../Castle/Health")
-
-[node name="MarginContainer2" type="MarginContainer" parent="HUD"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -87.5
-offset_right = 87.5
-offset_bottom = 40.0
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_constants/margin_top = 5
-
-[node name="SpellCharges" parent="HUD/MarginContainer2" node_paths=PackedStringArray("spell_book") instance=ExtResource("34_gygna")]
-layout_mode = 2
-spell_book = NodePath("../../../Player/SpellBook")
-
-[node name="EnemyIndicators" type="Control" parent="HUD" node_paths=PackedStringArray("camera")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("24_kc62h")
-indicator = ExtResource("25_jrlik")
-camera = NodePath("../../Player/ShakingCamera2D")
-margin = Vector2(16, 16)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e1e1l")

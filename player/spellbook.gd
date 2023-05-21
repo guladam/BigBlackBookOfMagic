@@ -2,6 +2,7 @@ extends Node2D
 class_name SpellBook
 
 signal spell_charge_used(charges_left: int)
+signal spell_drawn(spell: Spell)
 
 @export var game_stats: GameStats = preload("res://resources/game_stats.tres")
 
@@ -25,8 +26,8 @@ func change_to_spell(new_spell: String) -> Spell:
 	var spell: Spell = SPELLS[new_spell].instantiate()
 	add_child(spell)
 	spell.charge_used.connect(func(charges_left): spell_charge_used.emit(charges_left))
-	spell_charge_used.emit(spell.charges)
 	
+	spell_drawn.emit(spell)
 	game_stats.spell_drawn(spell)
 	
 	return spell

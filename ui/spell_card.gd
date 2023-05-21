@@ -1,9 +1,10 @@
-extends ColorRect
+extends Panel
 
 
 var upgrade: Upgrade
 
 
 func _ready() -> void:
-	$TextureRect.texture = upgrade.hover_img
-	$Label.text = upgrade.upgrade_name
+	if upgrade:
+		$TextureRect.texture = upgrade.hover_img
+		$Label.text = upgrade.upgrade_name
