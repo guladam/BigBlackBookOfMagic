@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgggwwcibug6h"]
+[gd_scene load_steps=5 format=3 uid="uid://cgggwwcibug6h"]
 
 [ext_resource type="PackedScene" uid="uid://dm8otvxcctv4s" path="res://spells/spell.tscn" id="1_vryj3"]
 [ext_resource type="Script" path="res://spells/fireball/fireball.gd" id="2_egggb"]
 [ext_resource type="Texture2D" uid="uid://cxttnp4qhef2t" path="res://spells/fireball/fire_orb.png" id="2_j3sn0"]
+[ext_resource type="AudioStream" uid="uid://bf34bac6yose1" path="res://sfx/fireball.ogg" id="4_lcxp2"]
 
 [node name="Fireball" instance=ExtResource("1_vryj3")]
-texture_filter = 1
 texture = ExtResource("2_j3sn0")
 script = ExtResource("2_egggb")
+sound = ExtResource("4_lcxp2")
 spell_name = "fireball"
 cast_range = 125

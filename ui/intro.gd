@@ -1,10 +1,16 @@
 extends ColorRect
 
 
+@export var music: AudioStream
 @onready var skip_button = $SkipButton
 @onready var scene_changer = $SceneChanger
 
 var intro_finished := false
+
+
+func _ready() -> void:
+	if music:
+		MusicPlayer.play_song(music)
 
 
 func _input(event) -> void:
@@ -24,4 +30,8 @@ func _on_intro_finished(_anim_name: String) -> void:
 
 
 func start_game() -> void:
-	scene_changer.transition_to()
+	var first_level := "res://levels/level1.tscn"
+	if Global.tutorial:
+		first_level = "res://ui/tutorial.tscn"
+		
+	scene_changer.transition_to(first_level)

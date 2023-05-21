@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b56riik0247iv"]
+[gd_scene load_steps=5 format=3 uid="uid://b56riik0247iv"]
 
 [ext_resource type="Script" path="res://castle/teleport.gd" id="1_ysudk"]
+[ext_resource type="Texture2D" uid="uid://ba7qqbwqddh2b" path="res://castle/teleport_light.png" id="2_gjh2i"]
+[ext_resource type="Texture2D" uid="uid://dj5urc2samcnf" path="res://castle/teleport.png" id="3_nlnea"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_numx3"]
 radius = 4.0
-height = 64.0
+height = 24.0
 
 [node name="Teleport" type="Area2D"]
 collision_layer = 0
@@ -12,11 +14,14 @@ collision_mask = 2
 monitorable = false
 script = ExtResource("1_ysudk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Light" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_gjh2i")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0, 1.2, 1.2, 1)
-polygon = PackedVector2Array(0, -4, -32, 0, -32, 8, 32, 8, 32, 0)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_nlnea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

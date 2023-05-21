@@ -3,6 +3,7 @@ class_name Spell
 
 signal charge_used(remaining_charges: int)
 
+@export var sound: AudioStream
 @export var spell_name: String
 @export var cast_range := 150
 @export var charges := 1 : set = _set_charges
@@ -17,11 +18,11 @@ func _set_charges(_charges: int) -> void:
 
 
 func cast() -> void:
-	pass
+	SfxPlayer.play(sound)
 
 
 func cast_towards(_target: Vector2) -> void:
-	pass
+	SfxPlayer.play(sound)
 
 
 func destroy_spell() -> void:

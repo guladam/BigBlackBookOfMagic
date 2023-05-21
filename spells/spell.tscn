@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm8otvxcctv4s"]
+[gd_scene load_steps=5 format=3 uid="uid://dm8otvxcctv4s"]
 
-[ext_resource type="Texture2D" uid="uid://cigvn1a8186dk" path="res://test_stuff/circle.png" id="1_lqqp1"]
 [ext_resource type="Script" path="res://spells/spell.gd" id="2_ibjxm"]
 
 [sub_resource type="Animation" id="Animation_br03b"]
@@ -44,7 +43,6 @@ _data = {
 [node name="Spell" type="Sprite2D"]
 texture_filter = 1
 scale = Vector2(3, 3)
-texture = ExtResource("1_lqqp1")
 hframes = 3
 script = ExtResource("2_ibjxm")
 

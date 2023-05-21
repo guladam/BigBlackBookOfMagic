@@ -1,23 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cc0re3meo4fks"]
+[gd_scene load_steps=9 format=3 uid="uid://cc0re3meo4fks"]
 
 [ext_resource type="PackedScene" uid="uid://b8wxqvurrnxcr" path="res://ui/scene_changer.tscn" id="1_0cpe3"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="1_ubxxt"]
 [ext_resource type="Script" path="res://ui/intro.gd" id="1_wkxqi"]
-
-[sub_resource type="Animation" id="Animation_n4t2i"]
-resource_name = "play_intro"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Label:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1, 7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
+[ext_resource type="Texture2D" uid="uid://dj13v4iate77v" path="res://ui/images/bg.png" id="2_rlr2l"]
+[ext_resource type="AudioStream" uid="uid://bdr8n8f2t5j1j" path="res://music/music.ogg" id="3_psak1"]
 
 [sub_resource type="Animation" id="Animation_h5rtj"]
 length = 0.001
@@ -34,6 +21,22 @@ tracks/0/keys = {
 "values": [1.0]
 }
 
+[sub_resource type="Animation" id="Animation_n4t2i"]
+resource_name = "play_intro"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p75kb"]
 _data = {
 "RESET": SubResource("Animation_h5rtj"),
@@ -46,22 +49,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ubxxt")
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_wkxqi")
+music = ExtResource("3_psak1")
 
 [node name="CastleImage" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.556863)
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_rlr2l")
+stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -82,10 +85,16 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer"]
 layout_mode = 2
-text = "INTRO TEXT INTRO TEXT INTRO TEXT
-INTRO TEXT INTRO TEXT INTRO TEXT
-INTRO TEXT INTRO TEXT INTRO TEXT
-INTRO TEXT INTRO TEXT INTRO TEXT"
+theme_override_font_sizes/font_size = 18
+text = "Once upon a time...
+
+A young man found a big black book
+in an old castle... He wanted to learn 
+magic so he could resurrect his long lost,
+beloved wife. 
+
+What could possibly go wrong?"
+horizontal_alignment = 1
 
 [node name="SkipButton" type="Button" parent="."]
 layout_mode = 1
@@ -100,6 +109,7 @@ offset_right = -30.0
 offset_bottom = -30.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("1_ubxxt")
 text = "Skip Intro"
 
 [node name="SceneChanger" parent="." instance=ExtResource("1_0cpe3")]

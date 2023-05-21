@@ -19,6 +19,7 @@ signal shape_detected(gesture, ink_left)
 @onready var gestures_file := "res://spellcasting/gestures.save"
 @onready var current_ink := max_ink
 @onready var line := $Line2D
+@onready var draw_sound: AudioStreamPlayer = $DrawSound
 
 var pressed = false
 var recognizer  = preload("res://spellcasting/recognizer.gd").new()
@@ -87,6 +88,7 @@ func _input(event):
 	# on first press
 	if event.is_action_pressed(input_action):
 		start_drawing(event)
+		draw_sound.play()
 	
 	# while pressed
 	if event is InputEventMouseMotion and pressed:
@@ -114,9 +116,11 @@ func _input(event):
 	# on release
 	if event.is_action_released(input_action):
 		pressed = event.pressed
+		draw_sound.stop()
 		
 		if drawing.size() > min_rec_points and drawing.size() < max_rec_points:
 			recognize_drawn_gesture()
+		
 
 
 func update_gesture():

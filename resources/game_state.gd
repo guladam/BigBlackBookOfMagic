@@ -6,7 +6,8 @@ signal game_state_changed(state)
 enum STATES {
 	PLAYING,
 	SPELL_DRAWING,
-	PAUSED
+	PAUSED,
+	UPGRADE_SELECTION
 }
 
 @export var state: STATES

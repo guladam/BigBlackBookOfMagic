@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://bobknhbny4wph"]
+
+[ext_resource type="Script" path="res://ui/end_screens.gd" id="1_dwncj"]
+[ext_resource type="Theme" uid="uid://cx6gnti534wka" path="res://ui/ui_theme.tres" id="2_f285l"]
+[ext_resource type="AudioStream" uid="uid://cp4er26s5w3l" path="res://sfx/loosing_level.ogg" id="2_tuljk"]
+[ext_resource type="Texture2D" uid="uid://bgd0dqm18hiq6" path="res://ui/images/dungeon_bg.png" id="3_3x8og"]
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_dwncj")
+sound = ExtResource("2_tuljk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.701961, 0.701961, 0.701961, 1)
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_f285l")
+texture = ExtResource("3_3x8og")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.5
+offset_top = -36.5
+offset_right = 157.5
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="TextureRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="TextureRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Your castle comes down crumbling...
+You've learned to use magic, but at what cost?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenu" type="Button" parent="TextureRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_f285l")
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="TextureRect/CenterContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

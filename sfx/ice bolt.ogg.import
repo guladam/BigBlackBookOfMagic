@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://s0jai6vsxiqe"
+path="res://.godot/imported/ice bolt.ogg-e9f3164a314ca0b5ff9e387b04116e37.oggvorbisstr"
+
+[deps]
+
+source_file="res://sfx/ice bolt.ogg"
+dest_files=["res://.godot/imported/ice bolt.ogg-e9f3164a314ca0b5ff9e387b04116e37.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

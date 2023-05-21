@@ -16,6 +16,7 @@ signal died
 var target := Vector2.ZERO
 var velocity: Vector2
 var freeze_modifier := 1.0
+var last_anim: String
 
 
 func _ready() -> void:
@@ -23,14 +24,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if target == Vector2.ZERO:
+	if target == Vector2.ZERO or anim.current_animation == "hit" or anim.current_animation == "die":
 		return
 	
 	position += velocity * freeze_modifier * delta
 
 
 func _on_attack_cooldown_timeout() -> void:
-	anim.play("attack")
+	if health.health > 0 and target == Vector2.ZERO:
+		anim.play("attack")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -65,7 +67,17 @@ func take_damage(damage: int) -> void:
 	health.health -= damage
 	if health.health <= 0:
 		died.emit()
-		queue_free()
+		anim.play("die")
+	else:
+		last_anim = anim.current_animation
+		anim.play("hit")
+		attack_cooldown.start()
+
+
+func play_last_anim() -> void:
+	if last_anim == "hit":
+		last_anim = "idle"
+	anim.play(last_anim)
 
 
 func freeze(slow_percent: float, time: float) -> void:

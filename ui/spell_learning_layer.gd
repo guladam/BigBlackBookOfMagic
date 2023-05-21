@@ -15,7 +15,7 @@ var selected_upgrade: Upgrade = null
 
 
 func show_upgrades(upgrades: Array[Upgrade]) -> void:
-	game_state.change_state(GameState.STATES.PAUSED)
+	game_state.change_state(GameState.STATES.UPGRADE_SELECTION)
 	get_tree().paused = true
 	
 	for upgrade in upgrades:

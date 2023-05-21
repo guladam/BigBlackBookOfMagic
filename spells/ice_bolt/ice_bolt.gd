@@ -4,6 +4,7 @@ extends "res://spells/spell.gd"
 
 
 func cast_towards(target: Vector2) -> void:
+	super.cast_towards(target)
 	var new_projectile = projectile.instantiate()
 	new_projectile.global_position = global_position
 	new_projectile.direction = global_position.direction_to(target)

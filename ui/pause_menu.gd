@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") and game_state.state == GameState.STATES.PAUSED:
 		unpause()
 		get_viewport().set_input_as_handled()
 

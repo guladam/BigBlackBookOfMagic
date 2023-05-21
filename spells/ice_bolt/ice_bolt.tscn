@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bo3p2qklmg8ss"]
+[gd_scene load_steps=5 format=3 uid="uid://bo3p2qklmg8ss"]
 
 [ext_resource type="PackedScene" uid="uid://dm8otvxcctv4s" path="res://spells/spell.tscn" id="1_4dbrl"]
 [ext_resource type="Texture2D" uid="uid://c2w8rr0hbrw80" path="res://spells/ice_bolt/ice_bolt_orb.png" id="2_mx8yo"]
 [ext_resource type="Script" path="res://spells/ice_bolt/ice_bolt.gd" id="2_ncy77"]
+[ext_resource type="AudioStream" uid="uid://s0jai6vsxiqe" path="res://sfx/ice bolt.ogg" id="4_2d0cq"]
 
 [node name="IceBolt" instance=ExtResource("1_4dbrl")]
-texture_filter = 1
 texture = ExtResource("2_mx8yo")
 script = ExtResource("2_ncy77")
+sound = ExtResource("4_2d0cq")
 spell_name = "ice_bolt"
 cast_range = 400
 charges = 2

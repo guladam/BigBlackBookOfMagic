@@ -6,6 +6,7 @@ extends "res://spells/spell.gd"
 
 
 func cast_towards(target: Vector2) -> void:
+	super.cast_towards(target)
 	var source := global_position
 	for z in range(zaps):
 		var new_zap = zap.instantiate()

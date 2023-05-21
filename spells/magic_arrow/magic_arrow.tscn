@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://uc4woju8rr6o"]
+[gd_scene load_steps=5 format=3 uid="uid://uc4woju8rr6o"]
 
 [ext_resource type="PackedScene" uid="uid://dm8otvxcctv4s" path="res://spells/spell.tscn" id="1_46j77"]
 [ext_resource type="Script" path="res://spells/magic_arrow/magic_arrow.gd" id="2_5gofx"]
 [ext_resource type="Texture2D" uid="uid://bjodollnrmka5" path="res://spells/magic_arrow/magic_arrow_orb.png" id="2_234t5"]
+[ext_resource type="AudioStream" uid="uid://s8pgmgkrfn5b" path="res://sfx/magic arrow.ogg" id="4_j22dm"]
 
 [node name="MagicArrow" instance=ExtResource("1_46j77")]
-texture_filter = 1
 texture = ExtResource("2_234t5")
 script = ExtResource("2_5gofx")
+sound = ExtResource("4_j22dm")
 spell_name = "magic_arrow"
 cast_range = 250
 charges = 3

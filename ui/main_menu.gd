@@ -1,5 +1,6 @@
 extends Control
 
+@onready var game_state: GameState = preload("res://resources/game_state.tres")
 @onready var game_stats: GameStats = preload("res://resources/game_stats.tres")
 @onready var scene_changer = $SceneChanger
 @onready var screens := {
@@ -9,6 +10,7 @@ extends Control
 }
 
 func _ready() -> void:
+	game_state.change_state(GameState.STATES.PLAYING)
 	game_stats.reset()
 
 
