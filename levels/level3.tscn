@@ -2990,7 +2990,7 @@ tracks/0/keys = {
 "method": &"spawn_random"
 }, {
 "args": [],
-"method": &"spawn_everywhere"
+"method": &"spawn_random"
 }]
 }
 
@@ -3005,23 +3005,14 @@ tracks/0/path = NodePath("EnemySpawner")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 8, 13, 19, 29, 36, 46),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 10, 40, 50),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
-"method": &"spawn_everywhere"
-}, {
-"args": [],
-"method": &"spawn_random"
-}, {
-"args": [],
 "method": &"spawn_random"
 }, {
 "args": [],
 "method": &"spawn_everywhere"
-}, {
-"args": [],
-"method": &"spawn_random"
 }, {
 "args": [],
 "method": &"spawn_random"

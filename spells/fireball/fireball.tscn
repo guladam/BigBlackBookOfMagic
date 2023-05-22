@@ -10,4 +10,4 @@ texture = ExtResource("2_j3sn0")
 script = ExtResource("2_egggb")
 sound = ExtResource("4_lcxp2")
 spell_name = "fireball"
-cast_range = 125
+cast_range = 175

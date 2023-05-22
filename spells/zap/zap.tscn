@@ -13,5 +13,4 @@ time_between_zaps = 0.1
 zaps = 3
 sound = ExtResource("4_x5wyy")
 spell_name = "zap"
-cast_range = 100
 charges = 5
